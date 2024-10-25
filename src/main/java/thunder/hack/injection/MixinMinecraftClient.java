@@ -81,6 +81,7 @@ public abstract class MixinMinecraftClient {
             FontRenderers.icons = FontRenderers.create(20, "icons");
             FontRenderers.mid_icons = FontRenderers.create(46, "icons");
             FontRenderers.big_icons = FontRenderers.create(72, "icons");
+            FontRenderers.source_han_sans_normal = FontRenderers.create(16f, "source_han_sans_normal");
         } catch (Exception e) {
             e.printStackTrace();
         }

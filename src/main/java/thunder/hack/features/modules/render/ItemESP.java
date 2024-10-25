@@ -62,13 +62,13 @@ public class ItemESP extends Module {
                 float endPosX = (float) position.z;
 
                 float diff = (endPosX - posX) / 2f;
-                float textWidth = (FontRenderers.sf_bold_mini.getStringWidth(ent.getDisplayName().getString()) * 1);
+                float textWidth = (FontRenderers.source_han_sans_normal.getStringWidth(ent.getDisplayName().getString()) * 1);
                 float tagX = (posX + diff - textWidth / 2f) * 1;
 
                 if (shadow.getValue())
-                    Render2DEngine.drawBlurredShadow(context.getMatrices(), tagX - 2, posY - 13, FontRenderers.sf_bold_mini.getStringWidth(ent.getDisplayName().getString()) + 4, 10, 14, scolor.getValue().getColorObject());
+                    Render2DEngine.drawBlurredShadow(context.getMatrices(), tagX - 2, posY - 13, FontRenderers.source_han_sans_normal.getStringWidth(ent.getDisplayName().getString()) + 4, 10, 14, scolor.getValue().getColorObject());
 
-                FontRenderers.sf_bold_mini.drawString(context.getMatrices(), ent.getDisplayName().getString(), tagX, (float) posY - 10, tcolor.getValue().getColor());
+                FontRenderers.source_han_sans_normal.drawString(context.getMatrices(), ent.getDisplayName().getString(), tagX, (float) posY - 10, tcolor.getValue().getColor());
             }
         }
 

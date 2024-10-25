@@ -32,7 +32,7 @@ public class MainMenuButton {
         float halfOfHeight = mc.getWindow().getScaledHeight() / 2f;
         Render2DEngine.drawHudBase(context.getMatrices(), halfOfWidth + posX, halfOfHeight + posY, width, height, 10);
         boolean hovered = Render2DEngine.isHovered(mouseX, mouseY, halfOfWidth + posX, halfOfHeight + posY, width, height);
-        FontRenderers.monsterrat.drawCenteredString(context.getMatrices(), name, halfOfWidth + posX + width / 2f, halfOfHeight + posY + height / 2f - 3f, hovered ? -1 : Render2DEngine.applyOpacity(-1, 0.7f));
+        FontRenderers.source_han_sans_normal.drawCenteredString(context.getMatrices(), name, halfOfWidth + posX + width / 2f, halfOfHeight + posY + height / 2f - 3f, hovered ? -1 : Render2DEngine.applyOpacity(-1, 0.7f));
     }
 
 
