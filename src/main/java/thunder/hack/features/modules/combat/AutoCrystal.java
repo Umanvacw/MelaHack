@@ -41,7 +41,6 @@ import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.setting.impl.SettingGroup;
 import thunder.hack.utility.TickTimer;
 import thunder.hack.utility.Timer;
-import thunder.hack.utility.world.ExplosionUtility;
 import thunder.hack.utility.math.MathUtility;
 import thunder.hack.utility.math.PredictUtility;
 import thunder.hack.utility.player.InteractionUtility;
@@ -51,6 +50,7 @@ import thunder.hack.utility.player.SearchInvResult;
 import thunder.hack.utility.render.Render2DEngine;
 import thunder.hack.utility.render.Render3DEngine;
 import thunder.hack.utility.render.animation.CaptureMark;
+import thunder.hack.utility.world.ExplosionUtility;
 
 import java.awt.*;
 import java.lang.reflect.Field;
@@ -345,10 +345,10 @@ public class AutoCrystal extends Module {
         if (mc.player == null || mc.world == null) return;
 
         if (e.getPacket() instanceof ExperienceOrbSpawnS2CPacket spawn)
-            processSpawnPacket(spawn.getId());
+            processSpawnPacket(spawn.getEntityId());
 
         if (e.getPacket() instanceof EntitySpawnS2CPacket spawn)
-            processSpawnPacket(spawn.getId());
+            processSpawnPacket(spawn.getEntityId());
 
         if (e.getPacket() instanceof ExplosionS2CPacket explosion) {
             for (Entity ent : Lists.newArrayList(mc.world.getEntities()))

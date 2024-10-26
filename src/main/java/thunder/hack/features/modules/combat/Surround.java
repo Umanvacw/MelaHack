@@ -6,7 +6,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
-import net.minecraft.network.packet.s2c.play.*;
+import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
 import net.minecraft.util.math.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,7 +21,9 @@ import thunder.hack.setting.impl.SettingGroup;
 import thunder.hack.utility.player.InteractionUtility;
 import thunder.hack.utility.world.HoleUtility;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import static thunder.hack.features.modules.client.ClientSettings.isRu;
 
@@ -113,7 +117,7 @@ public final class Surround extends PlaceModule {
         if (event.getPacket() instanceof EntitySpawnS2CPacket spawn && spawn.getEntityType() == EntityType.END_CRYSTAL) {
 
             EndCrystalEntity cr = new EndCrystalEntity(mc.world, spawn.getX(), spawn.getY(), spawn.getZ());
-            cr.setId(spawn.getId());
+            cr.setId(spawn.getEntityId());
 
             if (crystalBreaker.getValue().isEnabled() && cr.squaredDistanceTo(mc.player) <= remove.getPow2Value())
                 handlePacket();
