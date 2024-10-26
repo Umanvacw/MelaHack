@@ -1,32 +1,24 @@
-<p align="center">
-    <img src="https://i.imgur.com/ZiJ0r7y.png" style="width: 69%">
-</p>
+# MelaHack
 
+A fork of [ThunderHack-Recode](https://github.com/Pan4ur/ThunderHack-Recode), especially optimised for Simplified
+Chinese users(~~and non-english users~~).
 
-<div align="center">
-<img src="https://cdn.discordapp.com/attachments/934396624111824900/1230019159027617792/furro.gif?ex=6631cb9c&is=661f569c&hm=b6cee2cd9b6ec238f54c80dcfc421f2c8ecd3f750f2f61a62087d1e01d201e4d&" style="width: 69%">
-</div>
+This fork is mainly focused on anarchy and hvh features. Won't update bypasses of any anti-cheats.
 
+## Fixes & Features
 
-<div align="center">
-
-[![Discord Mine](https://img.shields.io/discord/1140266441082404924?label=discord&logo=discord&logoColor=white)](https://discord.gg/bJajFP3kCX)
-
-</div>
-
-
-# Cya 04.04.23 - 9.10.24 project!
-<div align="center">
-<img src="assets/U03-01-20-U12-05-01-14.png">
-</div>
+- [x] Bad Unicode character rendering
+- [ ] Simplified Chinese translation
+- [ ] ThunderHack Addon Docs
+- [ ] Supports of meteor addons
+- [ ] Scripting system
 
 ## Information
 
 - Minecraft version: ```Fabric``` 1.21 (or whatever version's the latest)
-- Default ClickGui keybind - **```P```** (<--- it is not, you should go to the Discord server and ask for the real keybind)
+- Default ClickGui keybind - **```P```**
 - Default prefix - **```@```**
 - Middle click the module to bind it.
-- Be aware Expensive, DoxWare 2.0, gumballoff, Treoderia "Recode", Deluxe Client, and Quick Client are both ratted and renames of this client.
 
 ## Requires these mods:
 

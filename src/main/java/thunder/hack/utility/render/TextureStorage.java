@@ -41,7 +41,7 @@ public final class TextureStorage {
     public static final Identifier paimon = Identifier.of("thunderhack", "textures/hud/elements/paimon.png");
     public static final Identifier baltika = Identifier.of("thunderhack", "textures/hud/elements/baltika.png");
     public static final Identifier kowk = Identifier.of("thunderhack", "textures/hud/elements/kowk.png");
-    public static final Identifier thLogo = Identifier.of("thunderhack", "textures/gui/elements/th.png");
+    public static final Identifier thLogo = Identifier.of("thunderhack", "textures/gui/elements/mh.png");
     public static final Identifier thudPic = Identifier.of("thunderhack", "textures/hud/elements/thud.png");
     public static final Identifier coordsIcon = Identifier.of("thunderhack", "textures/hud/icons/coords.png");
     public static final Identifier sunRiseSkin = Identifier.of("thunderhack", "textures/misc/sunskin.png");

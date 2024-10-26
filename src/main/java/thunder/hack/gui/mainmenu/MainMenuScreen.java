@@ -16,7 +16,6 @@ import thunder.hack.api.IAddon;
 import thunder.hack.core.Managers;
 import thunder.hack.core.manager.client.ModuleManager;
 import thunder.hack.gui.font.FontRenderers;
-import thunder.hack.utility.ThunderUtility;
 import thunder.hack.utility.render.Render2DEngine;
 import thunder.hack.utility.render.TextureStorage;
 
@@ -85,7 +84,7 @@ public class MainMenuScreen extends Screen {
 
         boolean hoveredLogo = Render2DEngine.isHovered(mouseX, mouseY, (int) (halfOfWidth - 120), (int) (halfOfHeight - 130), 210, 50);
 
-        FontRenderers.thglitchBig.drawCenteredString(context.getMatrices(), "THUNDERHACK", (int) (halfOfWidth), (int) (halfOfHeight - 120), new Color(255, 255, 255, hoveredLogo ? 230 : 180).getRGB());
+        FontRenderers.thglitchBig.drawCenteredString(context.getMatrices(), "MELAHACK", (int) (halfOfWidth), (int) (halfOfHeight - 120), new Color(255, 255, 255, hoveredLogo ? 230 : 180).getRGB());
 
         boolean hovered = Render2DEngine.isHovered(mouseX, mouseY, halfOfWidth - 50, halfOfHeight + 70, 100, 10);
 
@@ -120,12 +119,13 @@ public class MainMenuScreen extends Screen {
         context.drawTexture(TextureStorage.donation, mc.getWindow().getScaledWidth() - 79, mc.getWindow().getScaledHeight() - 39, 28, 28, 0, 0, 30, 30, 30, 30);
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 
-        int offsetY = 10;
-        for (String change : ThunderUtility.changeLog) {
-            String prefix = getPrefix(change);
-            FontRenderers.sf_medium.drawString(context.getMatrices(), prefix, 10, offsetY, Render2DEngine.applyOpacity(-1, 0.4f));
-            offsetY += 10;
-        }
+//        // Remove changelog cuz it's ugly
+//        int offsetY = 10;
+//        for (String change : ThunderUtility.changeLog) {
+//            String prefix = getPrefix(change);
+//            FontRenderers.sf_medium.drawString(context.getMatrices(), prefix, 10, offsetY, Render2DEngine.applyOpacity(-1, 0.4f));
+//            offsetY += 10;
+//        }
 
         int totalAddonsLoaded = Managers.ADDON.getTotalAddons();
         String addonsText = "Addons Loaded: " + totalAddonsLoaded;
@@ -181,7 +181,7 @@ public class MainMenuScreen extends Screen {
             Util.getOperatingSystem().open(URI.create("https://www.donationalerts.com/r/06ed/"));
 
         if (Render2DEngine.isHovered(mouseX, mouseY, (int) (halfOfWidth - 157), (int) (halfOfHeight - 140), 300, 70))
-            Util.getOperatingSystem().open(URI.create("https://thunderhack-site.vercel.app/"));
+            Util.getOperatingSystem().open(URI.create("https://github.com/HundSimon/MelaHack/"));
 
         return super.mouseClicked(mouseX, mouseY, button);
     }

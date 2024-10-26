@@ -11,9 +11,9 @@ import net.minecraft.util.math.BlockPos;
 import org.slf4j.Logger;
 import thunder.hack.core.Core;
 import thunder.hack.core.Managers;
-import thunder.hack.core.manager.client.*;
 import thunder.hack.core.hooks.ManagerShutdownHook;
 import thunder.hack.core.hooks.ModuleShutdownHook;
+import thunder.hack.core.manager.client.ModuleManager;
 import thunder.hack.utility.ThunderUtility;
 import thunder.hack.utility.render.Render2DEngine;
 
@@ -23,7 +23,7 @@ import java.lang.invoke.MethodHandles;
 public class ThunderHack implements ModInitializer {
     public static final ModMetadata MOD_META;
 
-    public static final String MOD_ID = "thunderhack";
+    public static final String MOD_ID = "melahack";
     public static final String VERSION = "1.7b2407";
     public static String GITHUB_HASH = "0";
     public static String BUILD_DATE = "1 Jan 1970";

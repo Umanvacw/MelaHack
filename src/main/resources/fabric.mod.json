@@ -1,11 +1,18 @@
 {
   "schemaVersion": 1,
-  "id": "thunderhack",
+  "id": "melahack",
   "version": "1.7",
   "icon": "icon.png",
-  "name": "ThunderHack",
+  "name": "MelaHack",
   "description": "Player Assistance Mod",
   "authors": [
+    {
+      "name": "Melaton",
+      "contact": {
+        "email": "contact@melaton.top",
+        "telegram": "https://t.me/iammelaton"
+      }
+    },
     {
       "name": "pan4ur",
       "contact": {
@@ -28,12 +35,12 @@
     ]
   },
   "contact": {
-    "sources": "https://github.com/Pan4ur/ThunderHack-Recode",
-    "homepage": "https://thunderhack-site.vercel.app",
-    "issues": "https://github.com/Pan4ur/ThunderHack-Recode/issues"
+    "sources": "https://github.com/HundSimon/MelaHack",
+    "homepage": "https://github.com/HundSimon/MelaHack",
+    "issues": "https://github.com/HundSimon/MelaHack/issues"
   },
   "mixins": [
-    "thunderhack.mixins.json"
+    "melahack.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.15.11",

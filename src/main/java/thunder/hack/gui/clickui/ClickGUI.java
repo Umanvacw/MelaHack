@@ -196,8 +196,8 @@ public class ClickGUI extends Screen {
         windows.forEach(w -> w.render(context, mouseX, mouseY, delta));
 
         if (!Objects.equals(currentDescription, "") && ModuleManager.clickGui.descriptions.getValue()) {
-            Render2DEngine.drawHudBase(context.getMatrices(), mouseX + 7, mouseY + 5, FontRenderers.sf_medium.getStringWidth(currentDescription) + 6, 11, 1f, false);
-            FontRenderers.sf_medium.drawString(context.getMatrices(), currentDescription, mouseX + 10, mouseY + 8, HudEditor.getColor(0).getRGB());
+            Render2DEngine.drawHudBase(context.getMatrices(), mouseX + 7, mouseY + 5, FontRenderers.source_han_sans_normal.getStringWidth(currentDescription) + 6, 11, 1f, false);
+            FontRenderers.source_han_sans_normal.drawString(context.getMatrices(), currentDescription, mouseX + 10, mouseY + 7, HudEditor.getColor(0).getRGB());
             currentDescription = "";
         }
 

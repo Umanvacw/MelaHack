@@ -8,11 +8,11 @@ import net.minecraft.util.math.RotationAxis;
 import thunder.hack.ThunderHack;
 import thunder.hack.core.Managers;
 import thunder.hack.core.manager.client.ModuleManager;
-import thunder.hack.gui.font.FontRenderers;
 import thunder.hack.features.hud.HudElement;
 import thunder.hack.features.modules.client.HudEditor;
 import thunder.hack.features.modules.client.Media;
 import thunder.hack.features.modules.misc.NameProtect;
+import thunder.hack.gui.font.FontRenderers;
 import thunder.hack.setting.Setting;
 import thunder.hack.utility.render.Render2DEngine;
 import thunder.hack.utility.render.Render3DEngine;
@@ -52,8 +52,8 @@ public class WaterMark extends HudElement {
         String username = ((ModuleManager.media.isEnabled() && Media.nickProtect.getValue()) || ModuleManager.nameProtect.isEnabled()) ? (ModuleManager.nameProtect.isEnabled() ? NameProtect.getCustomName() : "Protected") : mc.getSession().getUsername();
 
         if (mode.getValue() == Mode.Big) {
-            Render2DEngine.drawHudBase(context.getMatrices(), getPosX(), getPosY(), 106, 30, HudEditor.hudRound.getValue());
-            FontRenderers.thglitch.drawString(context.getMatrices(), "THUNDERHACK", getPosX() + 5.5, getPosY() + 5, -1);
+            Render2DEngine.drawHudBase(context.getMatrices(), getPosX(), getPosY(), 82, 30, HudEditor.hudRound.getValue());
+            FontRenderers.thglitch.drawString(context.getMatrices(), "MELAHACK", getPosX() + 5.5, getPosY() + 5, -1);
             FontRenderers.monsterrat.drawGradientString(context.getMatrices(), "recode", getPosX() + 35.5f, getPosY() + 21f, 1);
             setBounds(getPosX(), getPosY(), 106, 30);
         } else if (mode.getValue() == Mode.Small) {
@@ -69,7 +69,7 @@ public class WaterMark extends HudElement {
 
                 Render2DEngine.drawRect(context.getMatrices(), getPosX() + 13, getPosY() + 1.5f, 0.5f, 11, new Color(0x44FFFFFF, true));
 
-                FontRenderers.sf_bold.drawGradientString(context.getMatrices(), "Recode", getPosX() + 18, getPosY() + 5, 20);
+                FontRenderers.sf_bold.drawGradientString(context.getMatrices(), "Recode", getPosX() + 180, getPosY() + 5, 20);
 
                 RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE);
                 RenderSystem.setShaderTexture(0, TextureStorage.miniLogo);
@@ -102,10 +102,10 @@ public class WaterMark extends HudElement {
                 setBounds(getPosX(), getPosY(), 100, 15f);
             } else {
                 String info = Formatting.DARK_GRAY + "| " + Formatting.RESET + username + Formatting.DARK_GRAY + " | " + Formatting.RESET + Managers.SERVER.getPing() + " ms" + Formatting.DARK_GRAY + " | " + Formatting.RESET + (mc.isInSingleplayer() ? "SinglePlayer" : mc.getNetworkHandler().getServerInfo().address);
-                float width = FontRenderers.sf_bold.getStringWidth("ThunderHack " + info) + 5;
+                float width = FontRenderers.sf_bold.getStringWidth("MelaHack " + info) + 5;
                 Render2DEngine.drawHudBase(context.getMatrices(), getPosX(), getPosY(), width, 10, 3);
-                FontRenderers.sf_bold.drawGradientString(context.getMatrices(), ru.getValue() ? textUtil + " " : "ThunderHack ", getPosX() + 2, getPosY() + 2.5f, 10);
-                FontRenderers.sf_bold.drawString(context.getMatrices(), info, getPosX() + 2 + FontRenderers.sf_bold.getStringWidth("ThunderHack "), getPosY() + 2.5f, HudEditor.textColor.getValue().getColor());
+                FontRenderers.sf_bold.drawGradientString(context.getMatrices(), ru.getValue() ? textUtil + " " : "MelaHack ", getPosX() + 2, getPosY() + 2.5f, 10);
+                FontRenderers.sf_bold.drawString(context.getMatrices(), info, getPosX() + 2 + FontRenderers.sf_bold.getStringWidth("MelaHack "), getPosY() + 2.5f, HudEditor.textColor.getValue().getColor());
                 setBounds(getPosX(), getPosY(), width, 10);
             }
 
@@ -137,7 +137,7 @@ public class WaterMark extends HudElement {
             FontRenderers.profont.drawString(context.getMatrices(), info, getPosX() + 2.7, getPosY() + 2.953, HudEditor.textColor.getValue().getColor());
             setBounds(getPosX(), getPosY(), width, 8);
         } else {
-            FontRenderers.monsterrat.drawGradientString(context.getMatrices(), "ThunderHack v" + ThunderHack.VERSION, getPosX() + 5.5f, getPosY() + 5, 10);
+            FontRenderers.monsterrat.drawGradientString(context.getMatrices(), "MelaHack v" + ThunderHack.VERSION, getPosX() + 5.5f, getPosY() + 5, 10);
             setBounds(getPosX(), getPosY(), 100, 3);
         }
     }
