@@ -1,5 +1,15 @@
 # MelaHack
 
+<p align="center">
+ <a href="./README.md">
+ English
+ </a>
+  /
+  <a href="./README.zh_CN.md">
+ 简体中文
+ </a>
+</p>
+
 A fork of [ThunderHack-Recode](https://github.com/Pan4ur/ThunderHack-Recode), especially optimised for Simplified
 Chinese users(~~and non-english users~~).
 
@@ -8,22 +18,22 @@ This fork is mainly focused on anarchy and hvh features. Won't update bypasses o
 ## Fixes & Features
 
 - [x] Bad Unicode character rendering
-- [ ] Simplified Chinese translation
+- [x] Simplified Chinese translation
 - [ ] ThunderHack Addon Docs
 - [ ] Supports of meteor addons
 - [ ] Scripting system
 
 ## Information
 
-- Minecraft version: ```Fabric``` 1.21 (or whatever version's the latest)
+- Minecraft version: ```Fabric``` 1.21.1
 - Default ClickGui keybind - **```P```**
 - Default prefix - **```@```**
 - Middle click the module to bind it.
 
 ## Requires these mods:
 
-- [FabricApi 1.21](https://www.curseforge.com/minecraft/mc-mods/fabric-api/files/5531908)
-- [Java 21+](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
+- [FabricApi 1.21.1](https://www.curseforge.com/minecraft/mc-mods/fabric-api/files)
+- [Java 21+ (use jdk)](https://adoptium.net/temurin/releases/)
 
 ## Recommended to read:
 
