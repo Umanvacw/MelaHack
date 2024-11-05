@@ -21,14 +21,14 @@ import net.minecraft.util.Colors;
 import net.minecraft.util.Identifier;
 import org.lwjgl.opengl.GL40C;
 import thunder.hack.core.manager.client.ModuleManager;
-import thunder.hack.gui.font.FontRenderers;
-import thunder.hack.gui.hud.HudEditorGui;
 import thunder.hack.features.hud.HudElement;
 import thunder.hack.features.modules.client.HudEditor;
 import thunder.hack.features.modules.combat.Aura;
 import thunder.hack.features.modules.combat.AutoAnchor;
 import thunder.hack.features.modules.combat.AutoCrystal;
 import thunder.hack.features.modules.misc.NameProtect;
+import thunder.hack.gui.font.FontRenderers;
+import thunder.hack.gui.hud.HudEditorGui;
 import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.utility.ThunderUtility;
@@ -71,6 +71,7 @@ public class TargetHud extends HudElement {
     float ticks;
 
     private final Timer timer = new Timer();
+
 
     public TargetHud() {
         super("TargetHud", 150, 50);
@@ -193,7 +194,7 @@ public class TargetHud extends HudElement {
         Render2DEngine.renderTexture(context.getMatrices(), getPosX() + 3.5f + hurtPercent, getPosY() + 3.5f + hurtPercent, 40 - hurtPercent * 2, 40 - hurtPercent * 2, 40, 8, 8, 8, 64, 64);
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
 
-        FontRenderers.modules.drawString(context.getMatrices(), ModuleManager.media.isEnabled() ? "Protected " : ModuleManager.nameProtect.isEnabled() && target == mc.player ? NameProtect.getCustomName() : target.getName().getString(), getPosX() + 50, getPosY() + 7, -1);
+        FontRenderers.source_han_sans_normal.drawString(context.getMatrices(), ModuleManager.media.isEnabled() ? "Protected " : ModuleManager.nameProtect.isEnabled() && target == mc.player ? NameProtect.getCustomName() : target.getName().getString(), getPosX() + 50, getPosY() + 4.5f, -1);
         FontRenderers.modules.drawCenteredString(context.getMatrices(), hpMode.getValue() == HPmodeEn.HP ? String.valueOf(Math.round(10.0 * getHealth()) / 10.0) : (((Math.round(10.0 * getHealth()) / 10.0) / 20f) * 100 + "%"), getPosX() + 81f, getPosY() + 34f, -1);
 
 
@@ -206,6 +207,7 @@ public class TargetHud extends HudElement {
     }
 
     private void renderNurik(DrawContext context, float health, float animationFactor) {
+
         float hurtPercent = (Render2DEngine.interpolateFloat(MathUtility.clamp(target.hurtTime == 0 ? 0 : target.hurtTime + 1, 0, 10), target.hurtTime, Render3DEngine.getTickDelta())) / 8f;
         healthAnimation.setValue(health);
         health = (float) healthAnimation.getAnimationD();
@@ -256,11 +258,10 @@ public class TargetHud extends HudElement {
 
         FontRenderers.sf_bold.drawCenteredString(context.getMatrices(), hpMode.getValue() == HPmodeEn.HP ? String.valueOf(Math.round(10.0 * getHealth()) / 10.0) : (((Math.round(10.0 * getHealth()) / 10.0) / 20f) * 100 + "%"), getPosX() + 92f, getPosY() + 35f,
                 Render2DEngine.applyOpacity(Colors.WHITE, animationFactor));
-        //
 
-        //Имя
-        FontRenderers.sf_bold.drawString(context.getMatrices(), ModuleManager.media.isEnabled() ? "Protected " : ModuleManager.nameProtect.isEnabled() && target == mc.player ? NameProtect.getCustomName() : target.getName().getString(), getPosX() + 48, getPosY() + 7,
+        FontRenderers.source_han_sans_normal.drawString(context.getMatrices(), ModuleManager.media.isEnabled() ? "Protected " : ModuleManager.nameProtect.isEnabled() && target == mc.player ? NameProtect.getCustomName() : target.getName().getString(), getPosX() + 48, getPosY() + 4.5f,
                 Render2DEngine.applyOpacity(Colors.WHITE, animationFactor));
+
 
         if (target instanceof PlayerEntity) {
             RenderSystem.setShaderColor(1f, 1f, 1f, (float) MathUtility.clamp(animation.getAnimationd(), 0, 1f));
@@ -336,7 +337,7 @@ public class TargetHud extends HudElement {
         //
 
         //Имя
-        FontRenderers.sf_bold_mini.drawString(context.getMatrices(), ModuleManager.media.isEnabled() ? "Protected " : ModuleManager.nameProtect.isEnabled() && target == mc.player ? NameProtect.getCustomName() : target.getName().getString(), getPosX() + 38, getPosY() + 5, Render2DEngine.applyOpacity(Colors.WHITE, animationFactor));
+        FontRenderers.source_han_sans_normal.drawString(context.getMatrices(), ModuleManager.media.isEnabled() ? "Protected " : ModuleManager.nameProtect.isEnabled() && target == mc.player ? NameProtect.getCustomName() : target.getName().getString(), getPosX() + 38, getPosY() + 4, Render2DEngine.applyOpacity(Colors.WHITE, animationFactor));
 
         if (target instanceof PlayerEntity) {
             //Броня
@@ -469,7 +470,7 @@ public class TargetHud extends HudElement {
         FontRenderers.sf_bold.drawCenteredString(context.getMatrices(), hpMode.getValue() == HPmodeEn.HP ? String.valueOf(Math.round(10.0 * getHealth()) / 10.0) : (int) (((Math.round(10.0 * health) / 10.0) / 20f) * 100) + "%", getPosX() + 102, getPosY() + 24f, Render2DEngine.applyOpacity(Colors.WHITE, animationFactor));
 
         //Имя ебыря
-        FontRenderers.sf_bold.drawString(context.getMatrices(), ModuleManager.media.isEnabled() ? "Protected " : ModuleManager.nameProtect.isEnabled() && target == mc.player ? NameProtect.getCustomName() : target.getName().getString(), getPosX() + 55, getPosY() + 5, Render2DEngine.applyOpacity(Colors.WHITE, animationFactor));
+        FontRenderers.source_han_sans_normal.drawString(context.getMatrices(), ModuleManager.media.isEnabled() ? "Protected " : ModuleManager.nameProtect.isEnabled() && target == mc.player ? NameProtect.getCustomName() : target.getName().getString(), getPosX() + 55, getPosY() + 4.5, Render2DEngine.applyOpacity(Colors.WHITE, animationFactor));
 
         if (target instanceof PlayerEntity) {
             //Броня
