@@ -1,8 +1,9 @@
 package thunder.hack.features.modules.combat;
 
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.client.gui.screen.ingame.GenericContainerScreen;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.TntEntity;
@@ -17,6 +18,8 @@ import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -24,20 +27,19 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 import thunder.hack.core.Managers;
 import thunder.hack.core.manager.client.ModuleManager;
-import thunder.hack.events.impl.EventSync;
 import thunder.hack.events.impl.PacketEvent;
-import thunder.hack.injection.accesors.IMinecraftClient;
 import thunder.hack.features.modules.Module;
 import thunder.hack.features.modules.movement.Blink;
+import thunder.hack.injection.accesors.IMinecraftClient;
 import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.Bind;
 import thunder.hack.setting.impl.BooleanSettingGroup;
 import thunder.hack.setting.impl.SettingGroup;
 import thunder.hack.utility.Timer;
-import thunder.hack.utility.world.ExplosionUtility;
 import thunder.hack.utility.math.PredictUtility;
 import thunder.hack.utility.player.InventoryUtility;
 import thunder.hack.utility.player.SearchInvResult;
+import thunder.hack.utility.world.ExplosionUtility;
 
 public final class AutoTotem extends Module {
     private final Setting<Mode> mode = new Setting<>("Mode", Mode.Matrix);
@@ -85,13 +87,29 @@ public final class AutoTotem extends Module {
         super("AutoTotem", Category.COMBAT);
     }
 
-    @EventHandler
-    public void onSync(EventSync e) {
+    @Override
+    protected void onSync() {
         swapTo(getItemSlot());
-
-        if (rcGap.not(RCGap.Off) && (mc.player.getMainHandStack().getItem() instanceof SwordItem) && mc.options.useKey.isPressed() && !mc.player.isUsingItem())
-            ((IMinecraftClient) mc).idoItemUse();
-
+        HitResult crosshairTarget = mc.crosshairTarget;
+        if (crosshairTarget instanceof BlockHitResult blockHitResult) {
+            BlockPos pos = blockHitResult.getBlockPos();
+            if (rcGap.not(RCGap.Off)) {
+                ClientPlayerEntity clientPlayer = mc.player;
+                if (clientPlayer != null && clientPlayer.getMainHandStack().getItem() instanceof SwordItem && mc.options.useKey.isPressed() && !clientPlayer.isUsingItem()) {
+                    assert mc.world != null;
+                    if (!(mc.world.getBlockState(pos).getBlock() instanceof DoorBlock ||
+                            mc.world.getBlockState(pos).getBlock() instanceof BedBlock ||
+                            mc.world.getBlockState(pos).getBlock() instanceof TrapdoorBlock ||
+                            mc.world.getBlockState(pos).getBlock() instanceof CampfireBlock ||
+                            mc.world.getBlockState(pos).getBlock() instanceof CakeBlock ||
+                            mc.world.getBlockState(pos).getBlock() instanceof LeverBlock ||
+                            mc.world.getBlockState(pos).getBlock() instanceof ButtonBlock
+                    )) {
+                        ((IMinecraftClient) mc).idoItemUse();
+                    }
+                }
+            }
+        }
         delay--;
     }
 

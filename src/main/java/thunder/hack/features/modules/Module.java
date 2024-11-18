@@ -1,6 +1,7 @@
 package thunder.hack.features.modules;
 
 import com.mojang.logging.LogUtils;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.PendingUpdateManager;
@@ -17,10 +18,10 @@ import thunder.hack.ThunderHack;
 import thunder.hack.core.Managers;
 import thunder.hack.core.manager.client.CommandManager;
 import thunder.hack.core.manager.client.ModuleManager;
-import thunder.hack.gui.notification.Notification;
 import thunder.hack.features.modules.client.ClientSettings;
-import thunder.hack.features.modules.client.Windows;
 import thunder.hack.features.modules.client.UnHook;
+import thunder.hack.features.modules.client.Windows;
+import thunder.hack.gui.notification.Notification;
 import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.Bind;
 
@@ -52,6 +53,7 @@ public abstract class Module {
         this.displayName = name;
         this.description = "descriptions." + category.getName().toLowerCase() + "." + name.toLowerCase();
         this.category = category;
+        ClientTickEvents.END_CLIENT_TICK.register(this::onClientTick);
     }
 
     public void onEnable() {
@@ -82,6 +84,17 @@ public abstract class Module {
     public boolean isToggleable() {
         return true;
     }
+
+    protected void onClientTick(MinecraftClient client) {
+        if (mc.player != null && mc.world != null) {
+            onSync();
+        }
+    }
+
+    protected void onSync() {
+    }
+
+    ;
 
     protected void sendPacket(Packet<?> packet) {
         if (mc.getNetworkHandler() == null) return;
