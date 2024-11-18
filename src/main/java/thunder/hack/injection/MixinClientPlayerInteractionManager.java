@@ -51,9 +51,11 @@ public class MixinClientPlayerInteractionManager {
                         bs == Blocks.ENDER_CHEST ||
                         bs == Blocks.DISPENSER ||
                         bs == Blocks.DROPPER ||
+                        bs == Blocks.BELL ||
                         bs instanceof ShulkerBoxBlock ||
                         bs instanceof FenceBlock ||
                         bs instanceof FenceGateBlock ||
+                        bs instanceof DoorBlock ||
                         bs instanceof TrapdoorBlock)
                 && (ModuleManager.aura.isEnabled() || !NoInteract.onlyAura.getValue())) {
             cir.setReturnValue(ActionResult.PASS);
