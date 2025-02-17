@@ -45,16 +45,15 @@ public class BreakHighLight extends Module {
                 default -> noom = 1;
             }
 
-            Render3DEngine.drawFilledBox(
-                    stack,
+            Render3DEngine.FILLED_QUEUE.add(new Render3DEngine.FillAction(
                     shrunkMineBox.shrink(noom, noom, noom).offset(0.5 + noom * 0.5, 0.5 + noom * 0.5, 0.5 + noom * 0.5),
                     Render2DEngine.interpolateColorC(color.getValue().getColorObject(),color2.getValue().getColorObject(),noom)
-            );
-            Render3DEngine.drawBoxOutline(
+            ));
+            Render3DEngine.OUTLINE_QUEUE.add(new Render3DEngine.OutlineAction(
                     shrunkMineBox.shrink(noom, noom, noom).offset(0.5 + noom * 0.5, 0.5 + noom * 0.5, 0.5 + noom * 0.5),
                     Render2DEngine.interpolateColorC(ocolor.getValue().getColorObject(),ocolor2.getValue().getColorObject(),noom),
                     lineWidth.getValue()
-            );
+            ));
 
             switch (mode.getValue()) {
                 case Grow -> prevProgress = noom;
@@ -76,17 +75,16 @@ public class BreakHighLight extends Module {
                     default -> noom = 1;
                 }
 
-                Render3DEngine.drawFilledBox(
-                        stack,
+                Render3DEngine.FILLED_QUEUE.add(new Render3DEngine.FillAction(
                         shrunkMineBox.shrink(noom, noom, noom).offset(0.5 + noom * 0.5, 0.5 + noom * 0.5, 0.5 + noom * 0.5),
                         Render2DEngine.interpolateColorC(color.getValue().getColorObject(),color2.getValue().getColorObject(),noom)
-                );
+                ));
 
-                Render3DEngine.drawBoxOutline(
+                Render3DEngine.OUTLINE_QUEUE.add(new Render3DEngine.OutlineAction(
                         shrunkMineBox.shrink(noom, noom, noom).offset(0.5 + noom * 0.5, 0.5 + noom * 0.5, 0.5 + noom * 0.5),
                         Render2DEngine.interpolateColorC(ocolor.getValue().getColorObject(),ocolor2.getValue().getColorObject(),noom),
                         lineWidth.getValue()
-                );
+                ));
             }
         }));
     }

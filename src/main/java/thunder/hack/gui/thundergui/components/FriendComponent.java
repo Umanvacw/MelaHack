@@ -16,6 +16,7 @@ import thunder.hack.utility.render.animation.AnimationUtility;
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.util.Objects;
 
@@ -60,7 +61,7 @@ public class FriendComponent {
 
     public static NativeImageBackedTexture getHeadFromURL(String HeadStringURL) {
         try {
-            URL capeURL = new URL(HeadStringURL);
+            URL capeURL = URI.create(HeadStringURL).toURL();
             return getHeadFromStream(capeURL.openStream());
         } catch (IOException e) {
             return null;

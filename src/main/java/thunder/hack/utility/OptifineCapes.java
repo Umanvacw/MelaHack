@@ -8,6 +8,7 @@ import net.minecraft.util.Identifier;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 
 public final class OptifineCapes {
@@ -32,7 +33,7 @@ public final class OptifineCapes {
 
     public static NativeImageBackedTexture getCapeFromURL(String capeStringURL) {
         try {
-            URL capeURL = new URL(capeStringURL);
+            URL capeURL = URI.create(capeStringURL).toURL();
             return getCapeFromStream(capeURL.openStream());
         } catch (IOException e) {
             return null;

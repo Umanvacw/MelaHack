@@ -201,7 +201,7 @@ public class ESP extends Module {
                     double y = be.getPos().getY() - mc.getEntityRenderDispatcher().camera.getPos().getY();
                     double z = be.getPos().getZ() - mc.getEntityRenderDispatcher().camera.getPos().getZ();
 
-                    Render3DEngine.drawBoxOutline(new Box(be.getPos()), beakonColor.getValue().getColorObject(), 2);
+                    Render3DEngine.OUTLINE_QUEUE.add(new Render3DEngine.OutlineAction(new Box(be.getPos()), beakonColor.getValue().getColorObject(), 2));
                     float range = ((IBeaconBlockEntity) bbe).getLevel() * 10 + 11;
 
                     boolean ky = keepY.getValue();
@@ -230,7 +230,7 @@ public class ESP extends Module {
                         || block == Blocks.PLAYER_HEAD
                         || block == Blocks.SKELETON_SKULL
                         || block == Blocks.WITHER_SKELETON_SKULL) {
-                    Render3DEngine.drawBoxOutline(new Box(blockPos), burrowColor.getValue().getColorObject(), 2);
+                    Render3DEngine.OUTLINE_QUEUE.add(new Render3DEngine.OutlineAction(new Box(blockPos), burrowColor.getValue().getColorObject(), 2));
                     RenderSystem.disableDepthTest();
                     MatrixStack matrices = new MatrixStack();
                     Camera camera = mc.gameRenderer.getCamera();

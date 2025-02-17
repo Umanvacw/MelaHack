@@ -56,7 +56,7 @@ public class KitCommand extends Command {
 
     public static String getSelectedKit() {
         try {
-            JsonObject json = new JsonParser().parse(new FileReader(PATH)).getAsJsonObject();
+            JsonObject json = JsonParser.parseReader(new FileReader(PATH)).getAsJsonObject();
             if (!json.get("selected").getAsString().equals("none"))
                 return json.get("selected").getAsString();
         } catch (Exception ignored) {
@@ -67,7 +67,7 @@ public class KitCommand extends Command {
 
     public static String getKitItems(String kit) {
         try {
-            JsonObject json = new JsonParser().parse(new FileReader(PATH)).getAsJsonObject();
+            JsonObject json = JsonParser.parseReader(new FileReader(PATH)).getAsJsonObject();
             return json.get(kit).getAsString();
         } catch (Exception ignored) {
         }
@@ -77,7 +77,7 @@ public class KitCommand extends Command {
 
     private void listMessage() {
         try {
-            JsonObject json = new JsonParser().parse(new FileReader(PATH)).getAsJsonObject();
+            JsonObject json = JsonParser.parseReader(new FileReader(PATH)).getAsJsonObject();
             sendMessage(isRu() ? "Доступные киты:" : "Available kits:");
             for (int i = 0; i < json.entrySet().size(); i++) {
                 String item = json.entrySet().toArray()[i].toString().split("=")[0];
@@ -90,7 +90,7 @@ public class KitCommand extends Command {
 
     private void delete(String name) {
         try {
-            JsonObject json = new JsonParser().parse(new FileReader(PATH)).getAsJsonObject();
+            JsonObject json = JsonParser.parseReader(new FileReader(PATH)).getAsJsonObject();
             if (json.get(name) != null && !name.equals("selected")) {
                 json.remove(name);
                 if (json.get("selected").getAsString().equals(name))
@@ -105,7 +105,7 @@ public class KitCommand extends Command {
 
     private void set(String name) {
         try {
-            JsonObject json = new JsonParser().parse(new FileReader(PATH)).getAsJsonObject();
+            JsonObject json = JsonParser.parseReader(new FileReader(PATH)).getAsJsonObject();
             if (json.get(name) != null && !name.equals("selected")) {
                 json.addProperty("selected", name);
                 saveFile(json, name, isRu() ? "выбран" : "selected");
@@ -119,7 +119,7 @@ public class KitCommand extends Command {
     private void save(String name) {
         JsonObject json = new JsonObject();
         try {
-            json = new JsonParser().parse(new FileReader(PATH)).getAsJsonObject();
+            json = JsonParser.parseReader(new FileReader(PATH)).getAsJsonObject();
             if (json.get(name) != null && !name.equals("selected")) {
                 sendMessage(isRu() ? "Этот кит уже существует" : "This kit arleady exist");
                 return;

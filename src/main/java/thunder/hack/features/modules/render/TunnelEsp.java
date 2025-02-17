@@ -33,9 +33,9 @@ public class TunnelEsp extends Module {
                 if (box_.getLengthZ() < 5 && box_.getLengthX() < 5)
                     continue;
 
-                if (box.getValue()) Render3DEngine.drawFilledBox(stack, box_, color.getValue().getColorObject());
+                if (box.getValue()) Render3DEngine.FILLED_QUEUE.add(new Render3DEngine.FillAction(box_, color.getValue().getColorObject()));
                 if (outline.getValue())
-                    Render3DEngine.drawBoxOutline(box_, Render2DEngine.injectAlpha(color.getValue().getColorObject(), 255), 2);
+                    Render3DEngine.OUTLINE_QUEUE.add(new Render3DEngine.OutlineAction(box_, Render2DEngine.injectAlpha(color.getValue().getColorObject(), 255), 2));
             }
         } catch (Exception ignored) {
         }

@@ -72,7 +72,6 @@ public class ModuleCommand extends Command {
                                 return SINGLE_SUCCESS;
                             }
 
-                            JsonParser jp = new JsonParser();
                             if (setting.getValue().getClass().getSimpleName().equalsIgnoreCase("String")) {
                                 setting.setValue(settingValue);
                                 sendMessage(Formatting.DARK_GRAY + module.getName() + " " + setting.getName() + (isRu() ? " был выставлен " : " has been set to ") + settingValue);
@@ -88,7 +87,7 @@ public class ModuleCommand extends Command {
                                         module.disable();
                                     }
                                 }
-                                setCommandValue(module, setting, jp.parse(settingValue));
+                                setCommandValue(module, setting, JsonParser.parseString(settingValue));
                             } catch (Exception e) {
                                 sendMessage((isRu() ? "Неверное значение! Эта настройка требует тип: " : "Bad Value! This setting requires a: ") + setting.getValue().getClass().getSimpleName());
                                 return SINGLE_SUCCESS;

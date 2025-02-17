@@ -10,6 +10,14 @@ import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.utility.render.Render2DEngine;
 
 import static thunder.hack.utility.render.Render3DEngine.*;
+import static thunder.hack.utility.render.Render3DEngine.OUTLINE_QUEUE;
+import static thunder.hack.utility.render.Render3DEngine.OUTLINE_SIDE_QUEUE;
+import static thunder.hack.utility.render.Render3DEngine.FILLED_QUEUE;
+import static thunder.hack.utility.render.Render3DEngine.FILLED_SIDE_QUEUE;
+import static thunder.hack.utility.render.Render3DEngine.OutlineAction;
+import static thunder.hack.utility.render.Render3DEngine.OutlineSideAction;
+import static thunder.hack.utility.render.Render3DEngine.FillAction;
+import static thunder.hack.utility.render.Render3DEngine.FillSideAction;
 
 public class BlockHighLight extends Module {
     public BlockHighLight() {
@@ -31,18 +39,18 @@ public class BlockHighLight extends Module {
 
         switch (mode.getValue()) {
             case Both -> {
-                drawBoxOutline(new Box(bhr.getBlockPos()), Render2DEngine.injectAlpha(color.getValue().getColorObject(), 255), lineWidth.getValue());
-                drawFilledBox(stack, new Box(bhr.getBlockPos()), color.getValue().getColorObject());
+                OUTLINE_QUEUE.add(new OutlineAction(new Box(bhr.getBlockPos()), Render2DEngine.injectAlpha(color.getValue().getColorObject(), 255), lineWidth.getValue()));
+                FILLED_QUEUE.add(new FillAction(new Box(bhr.getBlockPos()), color.getValue().getColorObject()));
             }
             case BothSide -> {
-                drawSideOutline(new Box(bhr.getBlockPos()), Render2DEngine.injectAlpha(color.getValue().getColorObject(),255), lineWidth.getValue(),bhr.getSide());
-                drawFilledSide(stack,new Box(bhr.getBlockPos()),color.getValue().getColorObject(),bhr.getSide());
+                OUTLINE_SIDE_QUEUE.add(new OutlineSideAction(new Box(bhr.getBlockPos()), Render2DEngine.injectAlpha(color.getValue().getColorObject(),255), lineWidth.getValue(),bhr.getSide()));
+                FILLED_SIDE_QUEUE.add(new FillSideAction(new Box(bhr.getBlockPos()),color.getValue().getColorObject(),bhr.getSide()));
             }
-            case Fill -> drawFilledBox(stack,new Box(bhr.getBlockPos()),color.getValue().getColorObject());
-            case FilledSide -> drawFilledSide(stack,new Box(bhr.getBlockPos()),color.getValue().getColorObject(),bhr.getSide());
+            case Fill -> FILLED_QUEUE.add(new FillAction(new Box(bhr.getBlockPos()), color.getValue().getColorObject()));
+            case FilledSide -> FILLED_SIDE_QUEUE.add(new FillSideAction(new Box(bhr.getBlockPos()),color.getValue().getColorObject(),bhr.getSide()));
 
-            case Outline ->  drawBoxOutline(new Box(bhr.getBlockPos()), Render2DEngine.injectAlpha(color.getValue().getColorObject(),255), lineWidth.getValue());
-            case OutlinedSide -> drawSideOutline(new Box(bhr.getBlockPos()), Render2DEngine.injectAlpha(color.getValue().getColorObject(),255), lineWidth.getValue(),bhr.getSide());
+            case Outline ->  OUTLINE_QUEUE.add(new OutlineAction(new Box(bhr.getBlockPos()), Render2DEngine.injectAlpha(color.getValue().getColorObject(),255), lineWidth.getValue()));
+            case OutlinedSide -> OUTLINE_SIDE_QUEUE.add(new OutlineSideAction(new Box(bhr.getBlockPos()), Render2DEngine.injectAlpha(color.getValue().getColorObject(),255), lineWidth.getValue(),bhr.getSide()));
         }
     }
 }

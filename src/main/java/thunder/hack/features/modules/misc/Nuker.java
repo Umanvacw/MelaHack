@@ -40,6 +40,10 @@ import java.util.ArrayList;
 
 import static net.minecraft.block.Blocks.*;
 import static thunder.hack.features.modules.client.ClientSettings.isRu;
+import static thunder.hack.utility.render.Render3DEngine.FILLED_QUEUE;
+import static thunder.hack.utility.render.Render3DEngine.FillAction;
+import static thunder.hack.utility.render.Render3DEngine.OUTLINE_QUEUE;
+import static thunder.hack.utility.render.Render3DEngine.OutlineAction;
 
 public class Nuker extends Module {
     public Nuker() {
@@ -190,8 +194,8 @@ public class Nuker extends Module {
 
         if (renderBp != null) {
             Color color1 = colorMode.getValue() == ColorMode.Sync ? HudEditor.getColor(1) : color.getValue().getColorObject();
-            Render3DEngine.drawBoxOutline(new Box(blockData.bp), color1, 2);
-            Render3DEngine.drawFilledBox(stack, new Box(blockData.bp), Render2DEngine.injectAlpha(color1, 100));
+            OUTLINE_QUEUE.add(new OutlineAction(new Box(blockData.bp), color1, 2));
+            FILLED_QUEUE.add(new FillAction(new Box(blockData.bp), Render2DEngine.injectAlpha(color1, 100)));
         }
 
         if (mode.getValue() == Mode.Fast && breakTimer.passedMs(delay.getValue())) {

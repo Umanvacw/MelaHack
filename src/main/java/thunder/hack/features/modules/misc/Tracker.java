@@ -1,6 +1,5 @@
 package thunder.hack.features.modules.misc;
 
-import io.netty.util.internal.ConcurrentSet;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,6 +18,7 @@ import thunder.hack.utility.math.MathUtility;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static thunder.hack.features.modules.client.ClientSettings.isRu;
 
@@ -30,7 +30,7 @@ public class Tracker extends Module {
 
     protected final Setting<Boolean> only1v1 = new Setting<>("1v1-Only", true);
 
-    protected final Set<BlockPos> placed = new ConcurrentSet<>();
+    protected final Set<BlockPos> placed = ConcurrentHashMap.newKeySet();
     protected final AtomicInteger awaitingExp = new AtomicInteger();
     protected static final AtomicInteger crystals = new AtomicInteger();
     protected static final AtomicInteger exp = new AtomicInteger();

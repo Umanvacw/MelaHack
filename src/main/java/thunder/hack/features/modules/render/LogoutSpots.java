@@ -109,7 +109,7 @@ public class LogoutSpots extends Module {
             final PlayerEntity data = logoutCache.get(uuid);
             if (data != null) {
                 if (renderMode.is(RenderMode.Box)) {
-                    Render3DEngine.drawBoxOutline(data.getBoundingBox(), color.getValue().getColorObject(), 2);
+                    Render3DEngine.OUTLINE_QUEUE.add(new Render3DEngine.OutlineAction(data.getBoundingBox(), color.getValue().getColorObject(), 2));
                 } else {
                     PlayerEntityModel<PlayerEntity> modelPlayer = new PlayerEntityModel<>(new EntityRendererFactory.Context(
                             mc.getEntityRenderDispatcher(), mc.getItemRenderer(),

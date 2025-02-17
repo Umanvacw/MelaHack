@@ -139,7 +139,7 @@ public class CreditsScreen extends Screen {
 
     public static NativeImageBackedTexture getAvatarFromURL(String HeadStringURL) {
         try {
-            return getAvatarFromStream(new URL(HeadStringURL).openStream());
+            return getAvatarFromStream(URI.create(HeadStringURL).toURL().openStream());
         } catch (IOException e) {
             e.printStackTrace();
             return null;

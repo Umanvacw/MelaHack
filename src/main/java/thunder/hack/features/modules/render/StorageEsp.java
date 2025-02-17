@@ -16,6 +16,10 @@ import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.utility.render.Render2DEngine;
 import thunder.hack.utility.render.Render3DEngine;
+import static thunder.hack.utility.render.Render3DEngine.FILLED_QUEUE;
+import static thunder.hack.utility.render.Render3DEngine.FillAction;
+import static thunder.hack.utility.render.Render3DEngine.OUTLINE_QUEUE;
+import static thunder.hack.utility.render.Render3DEngine.OutlineAction;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -70,18 +74,18 @@ public class StorageEsp extends Module {
 
             if (fill.getValue()) {
                 if (blockEntity instanceof ChestBlockEntity) {
-                    Render3DEngine.drawFilledBox(stack, chestbox, color);
+                    FILLED_QUEUE.add(new FillAction(chestbox, color));
                 } else if (blockEntity instanceof EnderChestBlockEntity) {
-                    Render3DEngine.drawFilledBox(stack, chestbox, color);
-                } else Render3DEngine.drawFilledBox(stack, new Box(blockEntity.getPos()), color);
+                    FILLED_QUEUE.add(new FillAction(chestbox, color));
+                } else FILLED_QUEUE.add(new FillAction(new Box(blockEntity.getPos()), color));
             }
             if (outline.getValue()) {
                 if (blockEntity instanceof ChestBlockEntity) {
-                    Render3DEngine.drawBoxOutline(chestbox, Render2DEngine.injectAlpha(color, 255), 1f);
+                    OUTLINE_QUEUE.add(new OutlineAction(chestbox, Render2DEngine.injectAlpha(color, 255), 1f));
                 } else if (blockEntity instanceof EnderChestBlockEntity) {
-                    Render3DEngine.drawBoxOutline(chestbox, Render2DEngine.injectAlpha(color, 255), 1f);
+                    OUTLINE_QUEUE.add(new OutlineAction(chestbox, Render2DEngine.injectAlpha(color, 255), 1f));
                 } else
-                    Render3DEngine.drawBoxOutline(new Box(blockEntity.getPos()), Render2DEngine.injectAlpha(color, 255), 1f);
+                    OUTLINE_QUEUE.add(new OutlineAction(new Box(blockEntity.getPos()), Render2DEngine.injectAlpha(color, 255), 1f));
             }
         }
 
@@ -92,18 +96,18 @@ public class StorageEsp extends Module {
                     frameColor1 = shulkerframeColor.getValue().getColorObject();
 
                 if (fill.getValue())
-                    Render3DEngine.drawFilledBox(stack, iframe.getBoundingBox(), frameColor1);
+                    FILLED_QUEUE.add(new FillAction(iframe.getBoundingBox(), frameColor1));
 
                 if (outline.getValue())
-                    Render3DEngine.drawBoxOutline(iframe.getBoundingBox(), Render2DEngine.injectAlpha(frameColor1, 255), 1f);
+                    OUTLINE_QUEUE.add(new OutlineAction(iframe.getBoundingBox(), Render2DEngine.injectAlpha(frameColor1, 255), 1f));
             }
 
             if (ent instanceof ChestMinecartEntity mcart && cart.getValue()) {
                 if (fill.getValue())
-                    Render3DEngine.drawFilledBox(stack, mcart.getBoundingBox(), minecartColor.getValue().getColorObject());
+                    FILLED_QUEUE.add(new FillAction(mcart.getBoundingBox(), minecartColor.getValue().getColorObject()));
 
                 if (outline.getValue())
-                    Render3DEngine.drawBoxOutline(mcart.getBoundingBox(), Render2DEngine.injectAlpha(minecartColor.getValue().getColorObject(), 255), 1f);
+                    OUTLINE_QUEUE.add(new OutlineAction(mcart.getBoundingBox(), Render2DEngine.injectAlpha(minecartColor.getValue().getColorObject(), 255), 1f));
             }
         }
     }

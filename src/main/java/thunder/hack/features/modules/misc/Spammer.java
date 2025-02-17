@@ -10,6 +10,7 @@ import thunder.hack.setting.Setting;
 import thunder.hack.utility.Timer;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -99,8 +100,8 @@ public class Spammer extends Module {
     private void changeFact() {
         Managers.ASYNC.run(() -> {
             try {
-                String jsonResponse = IOUtils.toString(new URL("https://catfact.ninja/fact?max_length=200"), StandardCharsets.UTF_8);
-                JsonObject jsonObject = new JsonParser().parse(jsonResponse).getAsJsonObject();
+                String jsonResponse = IOUtils.toString(URI.create("https://catfact.ninja/fact?max_length=200").toURL(), StandardCharsets.UTF_8);
+                JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
                 fact = jsonObject.get("fact").getAsString();
             } catch (IOException e) {
                 disable(isRu() ? "Не удалось загрузить факт, может ты включишь интернет?" : "Failed to load the fact, can you turn on the Internet?");
