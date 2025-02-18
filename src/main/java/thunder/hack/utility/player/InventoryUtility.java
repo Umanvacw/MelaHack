@@ -386,7 +386,7 @@ public final class InventoryUtility {
         if (Name == null) return Items.AIR;
         for (Block block : Registries.BLOCK)
             if (block.getTranslationKey().replace("block.minecraft.", "").equals(Name.toLowerCase()))
-                return Item.fromBlock(block);
+                return block.asItem();
         for (Item item : Registries.ITEM)
             if (item.getTranslationKey().replace("item.minecraft.", "").equals(Name.toLowerCase()))
                 return item;
