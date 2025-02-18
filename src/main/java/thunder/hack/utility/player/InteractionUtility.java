@@ -203,41 +203,41 @@ public final class InteractionUtility {
     public static @NotNull ArrayList<BlockPosWithFacing> getSupportBlocks(@NotNull BlockPos bp) {
         ArrayList<BlockPosWithFacing> list = new ArrayList<>();
 
-        if (mc.world.getBlockState(bp.add(0, -1, 0)).isSolid() || awaiting.containsKey(bp.add(0, -1, 0)))
+        if (mc.world.getBlockState(bp.add(0, -1, 0)).isSolidBlock(mc.world, bp.add(0, -1, 0)) || awaiting.containsKey(bp.add(0, -1, 0)))
             list.add(new BlockPosWithFacing(bp.add(0, -1, 0), Direction.UP));
 
-        if (mc.world.getBlockState(bp.add(0, 1, 0)).isSolid() || awaiting.containsKey(bp.add(0, 1, 0)))
+        if (mc.world.getBlockState(bp.add(0, 1, 0)).isSolidBlock(mc.world, bp.add(0, 1, 0)) || awaiting.containsKey(bp.add(0, 1, 0)))
             list.add(new BlockPosWithFacing(bp.add(0, 1, 0), Direction.DOWN));
 
-        if (mc.world.getBlockState(bp.add(-1, 0, 0)).isSolid() || awaiting.containsKey(bp.add(-1, 0, 0)))
+        if (mc.world.getBlockState(bp.add(-1, 0, 0)).isSolidBlock(mc.world, bp.add(-1, 0, 0)) || awaiting.containsKey(bp.add(-1, 0, 0)))
             list.add(new BlockPosWithFacing(bp.add(-1, 0, 0), Direction.EAST));
 
-        if (mc.world.getBlockState(bp.add(1, 0, 0)).isSolid() || awaiting.containsKey(bp.add(1, 0, 0)))
+        if (mc.world.getBlockState(bp.add(1, 0, 0)).isSolidBlock(mc.world, bp.add(1, 0, 0)) || awaiting.containsKey(bp.add(1, 0, 0)))
             list.add(new BlockPosWithFacing(bp.add(1, 0, 0), Direction.WEST));
 
-        if (mc.world.getBlockState(bp.add(0, 0, 1)).isSolid() || awaiting.containsKey(bp.add(0, 0, 1)))
+        if (mc.world.getBlockState(bp.add(0, 0, 1)).isSolidBlock(mc.world, bp.add(0, 0, 1)) || awaiting.containsKey(bp.add(0, 0, 1)))
             list.add(new BlockPosWithFacing(bp.add(0, 0, 1), Direction.NORTH));
 
-        if (mc.world.getBlockState(bp.add(0, 0, -1)).isSolid() || awaiting.containsKey(bp.add(0, 0, -1)))
+        if (mc.world.getBlockState(bp.add(0, 0, -1)).isSolidBlock(mc.world, bp.add(0, 0, -1)) || awaiting.containsKey(bp.add(0, 0, -1)))
             list.add(new BlockPosWithFacing(bp.add(0, 0, -1), Direction.SOUTH));
 
         return list;
     }
 
     public static @Nullable BlockPosWithFacing checkNearBlocks(@NotNull BlockPos blockPos) {
-        if (mc.world.getBlockState(blockPos.add(0, -1, 0)).isSolid())
+        if (mc.world.getBlockState(blockPos.add(0, -1, 0)).isSolidBlock(mc.world, blockPos.add(0, -1, 0)))
             return new BlockPosWithFacing(blockPos.add(0, -1, 0), Direction.UP);
 
-        else if (mc.world.getBlockState(blockPos.add(-1, 0, 0)).isSolid())
+        else if (mc.world.getBlockState(blockPos.add(-1, 0, 0)).isSolidBlock(mc.world, blockPos.add(-1, 0, 0)))
             return new BlockPosWithFacing(blockPos.add(-1, 0, 0), Direction.EAST);
 
-        else if (mc.world.getBlockState(blockPos.add(1, 0, 0)).isSolid())
+        else if (mc.world.getBlockState(blockPos.add(1, 0, 0)).isSolidBlock(mc.world, blockPos.add(1, 0, 0)))
             return new BlockPosWithFacing(blockPos.add(1, 0, 0), Direction.WEST);
 
-        else if (mc.world.getBlockState(blockPos.add(0, 0, 1)).isSolid())
+        else if (mc.world.getBlockState(blockPos.add(0, 0, 1)).isSolidBlock(mc.world, blockPos.add(0, 0, 1)))
             return new BlockPosWithFacing(blockPos.add(0, 0, 1), Direction.NORTH);
 
-        else if (mc.world.getBlockState(blockPos.add(0, 0, -1)).isSolid())
+        else if (mc.world.getBlockState(blockPos.add(0, 0, -1)).isSolidBlock(mc.world, blockPos.add(0, 0, -1)))
             return new BlockPosWithFacing(blockPos.add(0, 0, -1), Direction.SOUTH);
         return null;
     }
@@ -297,7 +297,7 @@ public final class InteractionUtility {
     }
 
     public static boolean isSolid(BlockPos bp) {
-        return mc.world.getBlockState(bp).isSolid() || awaiting.containsKey(bp);
+        return mc.world.getBlockState(bp).isSolidBlock(mc.world, bp) || awaiting.containsKey(bp);
     }
 
     public static @NotNull List<Direction> getStrictBlockDirections(@NotNull BlockPos bp) {

@@ -182,7 +182,7 @@ public final class Burrow extends Module {
     }
 
     public void handleDefault(BlockPos pos) {
-        if ((mc.world.getBlockState(BlockPos.ofFloored(mc.player.getPos().offset(Direction.UP, 0.2))).blocksMovement() || !mc.player.verticalCollision)) {
+        if ((mc.world.getBlockState(BlockPos.ofFloored(mc.player.getPos().offset(Direction.UP, 0.2))).isFullCube(mc.world, BlockPos.ofFloored(mc.player.getPos().offset(Direction.UP, 0.2))) || !mc.player.verticalCollision)) {
             return;
         }
 
@@ -196,7 +196,7 @@ public final class Burrow extends Module {
         if (!allowUp.getValue()) {
             BlockPos upUp = pos.up(2);
             BlockState upState = mc.world.getBlockState(upUp);
-            if (upState.blocksMovement()) {
+            if (upState.isFullCube(mc.world, upUp)) {
                 if (!wait.getValue())
                     disable(isRu() ? "Над головой блок, невозможно забурровиться! Отключаю.." : "Above the head block, impossible to burrow! Disabling..");
                 return;
@@ -315,7 +315,7 @@ public final class Burrow extends Module {
             }
 
             BlockState state = mc.world.getBlockState(pos);
-            if (!this.air.getValue() && !state.blocksMovement() || state.getBlock() == Blocks.AIR) {
+            if (!this.air.getValue() && !state.isFullCube(mc.world, pos) || state.getBlock() == Blocks.AIR) {
                 if (air) {
                     if (add) return discrete.getValue() ? pos.getY() : y - off;
                     else return discrete.getValue() ? last.getY() : lastOff;

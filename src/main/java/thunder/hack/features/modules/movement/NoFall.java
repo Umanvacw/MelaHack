@@ -92,7 +92,7 @@ public class NoFall extends Module {
     }
 
     private void doWaterDrop(SearchInvResult waterResult, BlockPos playerPos) {
-        if (mc.world.getBlockState(playerPos.down()).isSolid() || mc.world.getBlockState(playerPos.down().down()).isSolid()) {
+        if (mc.world.getBlockState(playerPos.down()).isSolidBlock(mc.world, playerPos.down()) || mc.world.getBlockState(playerPos.down().down()).isSolidBlock(mc.world, playerPos.down().down())) {
             InventoryUtility.saveSlot();
             waterResult.switchTo();
             mc.interactionManager.interactItem(mc.player, Hand.MAIN_HAND);
@@ -114,9 +114,9 @@ public class NoFall extends Module {
     }
 
     private void doWebDrop(SearchInvResult webResult, BlockPos playerPos) {
-        if (mc.world.getBlockState(playerPos.down()).isSolid() || mc.world.getBlockState(playerPos.down().down()).isSolid()) {
+        if (mc.world.getBlockState(playerPos.down()).isSolidBlock(mc.world, playerPos.down()) || mc.world.getBlockState(playerPos.down().down()).isSolidBlock(mc.world, playerPos.down().down())) {
             InventoryUtility.saveSlot();
-            if (mc.world.getBlockState(playerPos.down()).isSolid())
+            if (mc.world.getBlockState(playerPos.down()).isSolidBlock(mc.world, playerPos.down()))
                 InteractionUtility.placeBlock(playerPos, InteractionUtility.Rotate.None, InteractionUtility.Interact.Vanilla, InteractionUtility.PlaceMode.Normal, webResult.slot(), false, true);
             else
                 InteractionUtility.placeBlock(playerPos.down(), InteractionUtility.Rotate.None, InteractionUtility.Interact.Vanilla, InteractionUtility.PlaceMode.Normal, webResult.slot(), false, true);
@@ -126,9 +126,9 @@ public class NoFall extends Module {
     }
 
     private void doVinesDrop(SearchInvResult vinesResult, BlockPos playerPos) {
-        if (mc.world.getBlockState(playerPos.down()).isSolid() || mc.world.getBlockState(playerPos.down().down()).isSolid()) {
+        if (mc.world.getBlockState(playerPos.down()).isSolidBlock(mc.world, playerPos.down()) || mc.world.getBlockState(playerPos.down().down()).isSolidBlock(mc.world, playerPos.down().down())) {
             InventoryUtility.saveSlot();
-            if (mc.world.getBlockState(playerPos.down()).isSolid())
+            if (mc.world.getBlockState(playerPos.down()).isSolidBlock(mc.world, playerPos.down()))
                 InteractionUtility.placeBlock(playerPos, InteractionUtility.Rotate.None, InteractionUtility.Interact.Vanilla, InteractionUtility.PlaceMode.Normal, vinesResult.slot(), false, true);
             else
                 InteractionUtility.placeBlock(playerPos.down(), InteractionUtility.Rotate.None, InteractionUtility.Interact.Vanilla, InteractionUtility.PlaceMode.Normal, vinesResult.slot(), false, true);
@@ -138,9 +138,9 @@ public class NoFall extends Module {
     }
 
     private void doSnowDrop(SearchInvResult snowResult, BlockPos playerPos) {
-        if (mc.world.getBlockState(playerPos.down()).isSolid() || mc.world.getBlockState(playerPos.down().down()).isSolid()) {
+        if (mc.world.getBlockState(playerPos.down()).isSolidBlock(mc.world, playerPos.down()) || mc.world.getBlockState(playerPos.down().down()).isSolidBlock(mc.world, playerPos.down().down())) {
             InventoryUtility.saveSlot();
-            if (mc.world.getBlockState(playerPos.down()).isSolid())
+            if (mc.world.getBlockState(playerPos.down()).isSolidBlock(mc.world, playerPos.down()))
                 InteractionUtility.placeBlock(playerPos, InteractionUtility.Rotate.None, InteractionUtility.Interact.Vanilla, InteractionUtility.PlaceMode.Normal, snowResult.slot(), false, true);
             else
                 InteractionUtility.placeBlock(playerPos.down(), InteractionUtility.Rotate.None, InteractionUtility.Interact.Vanilla, InteractionUtility.PlaceMode.Normal, snowResult.slot(), false, true);
