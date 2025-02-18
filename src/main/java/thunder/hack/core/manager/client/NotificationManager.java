@@ -91,8 +91,11 @@ public class NotificationManager implements IManager {
     }
 
     private void mac(final String message) {
+        if (message == null) return;
+        
         final ProcessBuilder processBuilder = new ProcessBuilder();
-        processBuilder.command("osascript", "-e", "display notification \"" + message + "\" with title \"ThunderHack\"");
+        String escapedMessage = message.replace("\"", "\\\"");
+        processBuilder.command("/usr/bin/osascript", "-e", "display notification \"" + escapedMessage + "\" with title \"ThunderHack\"");
         try {
             processBuilder.start();
         } catch (IOException e) {
@@ -101,9 +104,12 @@ public class NotificationManager implements IManager {
     }
 
     private void linux(final String message) {
-        final ProcessBuilder processBuilder = new ProcessBuilder();
-        processBuilder.command("notify-send", "-a", "ThunderHack", message);
+        if (message == null) return;
 
+        final ProcessBuilder processBuilder = new ProcessBuilder();
+        String escapedMessage = message.replace("\"", "\\\"");
+        processBuilder.command("/usr/bin/notify-send", "-a", "ThunderHack", escapedMessage);
+        
         try {
             processBuilder.start();
         } catch (IOException e) {
