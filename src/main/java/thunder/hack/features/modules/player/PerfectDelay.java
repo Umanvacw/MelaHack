@@ -8,8 +8,8 @@ import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.TridentItem;
 import thunder.hack.core.manager.client.ModuleManager;
-import thunder.hack.injection.accesors.IClientPlayerEntity;
 import thunder.hack.features.modules.Module;
+import thunder.hack.injection.accesors.IClientPlayerEntity;
 import thunder.hack.setting.Setting;
 
 public class PerfectDelay extends Module {
@@ -23,7 +23,7 @@ public class PerfectDelay extends Module {
     private final Setting<Boolean> trident = new Setting<>("Trident", true);
 
     private float getEnchantLevel(ItemStack stack) {
-        return EnchantmentHelper.getLevel(mc.world.getRegistryManager().get(Enchantments.PROTECTION.getRegistryRef()).getEntry(Enchantments.QUICK_CHARGE).get(), stack);
+        return EnchantmentHelper.getLevel(mc.world.getRegistryManager().getOrThrow(Enchantments.PROTECTION.getRegistryRef()).getEntry(Enchantments.QUICK_CHARGE).get(), stack);
     }
 
     @Override

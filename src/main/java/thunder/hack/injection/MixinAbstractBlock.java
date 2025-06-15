@@ -1,7 +1,5 @@
 package thunder.hack.injection;
 
-import thunder.hack.core.manager.client.ModuleManager;
-import thunder.hack.features.modules.player.AutoTool;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -13,6 +11,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import thunder.hack.core.manager.client.ModuleManager;
+import thunder.hack.features.modules.player.AutoTool;
 
 import static net.minecraft.enchantment.Enchantments.EFFICIENCY;
 import static thunder.hack.core.manager.IManager.mc;
@@ -35,7 +35,7 @@ public abstract class MixinAbstractBlock {
     public float getDigSpeed(BlockState state, ItemStack stack)
     {
         double str = stack.getMiningSpeedMultiplier(state);
-        int effect = EnchantmentHelper.getLevel(mc.world.getRegistryManager().get(EFFICIENCY.getRegistryRef()).getEntry(EFFICIENCY).get(), stack);
+        int effect = EnchantmentHelper.getLevel(mc.world.getRegistryManager().getOrThrow(EFFICIENCY.getRegistryRef()).getEntry(EFFICIENCY).get(), stack);
         return (float) Math.max(str + (str > 1.0 ? (effect * effect + 1.0) : 0.0), 0.0);
     }
 }

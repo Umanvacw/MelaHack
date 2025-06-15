@@ -23,8 +23,8 @@ import thunder.hack.events.impl.PacketEvent;
 import thunder.hack.events.impl.TotemPopEvent;
 import thunder.hack.features.modules.Module;
 import thunder.hack.setting.Setting;
-import thunder.hack.utility.world.ExplosionUtility;
 import thunder.hack.utility.player.InventoryUtility;
+import thunder.hack.utility.world.ExplosionUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +75,7 @@ public class FakePlayer extends Module {
             fakePlayer.onDamaged(mc.world.getDamageSources().generic());
             fakePlayer.setHealth(fakePlayer.getHealth() + fakePlayer.getAbsorptionAmount() - ExplosionUtility.getAutoCrystalDamage(new Vec3d(explosion.getX(), explosion.getY(), explosion.getZ()), fakePlayer, 0, false));
             if (fakePlayer.isDead()) {
-                if (fakePlayer.tryUseTotem(mc.world.getDamageSources().generic())) {
+                if (fakePlayer.tryUseDeathProtector(mc.world.getDamageSources().generic())) {
                     fakePlayer.setHealth(10f);
 
 
@@ -132,7 +132,7 @@ public class FakePlayer extends Module {
                 fakePlayer.setHealth(fakePlayer.getHealth() + fakePlayer.getAbsorptionAmount() - InventoryUtility.getHitDamage(mc.player.getMainHandStack(), fakePlayer));
             else fakePlayer.setHealth(fakePlayer.getHealth() + fakePlayer.getAbsorptionAmount() - 1f);
             if (fakePlayer.isDead()) {
-                if (fakePlayer.tryUseTotem(mc.world.getDamageSources().generic())) {
+                if (fakePlayer.tryUseDeathProtector(mc.world.getDamageSources().generic())) {
                     fakePlayer.setHealth(10f);
                     new EntityStatusS2CPacket(fakePlayer, EntityStatuses.USE_TOTEM_OF_UNDYING).apply(mc.player.networkHandler);
                 }

@@ -22,10 +22,10 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 import org.joml.Vector4d;
 import thunder.hack.events.impl.PacketEvent;
-import thunder.hack.gui.font.FontRenderers;
-import thunder.hack.injection.accesors.IEntity;
 import thunder.hack.features.modules.Module;
 import thunder.hack.features.modules.misc.FakePlayer;
+import thunder.hack.gui.font.FontRenderers;
+import thunder.hack.injection.accesors.IEntity;
 import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.utility.math.MathUtility;
@@ -114,7 +114,7 @@ public class LogoutSpots extends Module {
                     PlayerEntityModel<PlayerEntity> modelPlayer = new PlayerEntityModel<>(new EntityRendererFactory.Context(
                             mc.getEntityRenderDispatcher(), mc.getItemRenderer(),
                             mc.getBlockRenderManager(), mc.getEntityRenderDispatcher().getHeldItemRenderer(),
-                            mc.getResourceManager(), mc.getEntityModelLoader(), mc.textRenderer).getPart(EntityModelLayers.PLAYER), false);
+                            mc.getResourceManager(), mc.getLoadedEntityModels(), mc.textRenderer).getPart(EntityModelLayers.PLAYER), false);
                     modelPlayer.getHead().scale(new Vector3f(-0.3f, -0.3f, -0.3f));
 
                     renderEntity(s, data, modelPlayer, ((OtherClientPlayerEntity)data).getSkinTextures().texture(), color.getValue().getAlpha());
@@ -170,9 +170,9 @@ public class LogoutSpots extends Module {
         matrices.translate((float) x, (float) y, (float) z);
         matrices.multiply(RotationAxis.POSITIVE_Y.rotation(MathUtility.rad(180 - entity.bodyYaw)));
         prepareScale(matrices);
-        modelBase.animateModel((PlayerEntity) entity, entity.limbAnimator.getPos(), entity.limbAnimator.getSpeed(), Render3DEngine.getTickDelta());
+        modelBase.animateModel((PlayerEntity) entity, entity.limbAnimator.getAnimationProgress(), entity.limbAnimator.getSpeed(), Render3DEngine.getTickDelta());
         float limbSpeed = Math.min(entity.limbAnimator.getSpeed(), 1f);
-        modelBase.setAngles((PlayerEntity) entity, entity.limbAnimator.getPos(), limbSpeed, entity.age, entity.headYaw - entity.bodyYaw, entity.getPitch());
+        modelBase.setAngles((PlayerEntity) entity, entity.limbAnimator.getAnimationProgress(), limbSpeed, entity.age, entity.headYaw - entity.bodyYaw, entity.getPitch());
         BufferBuilder buffer;
         if (renderMode.is(RenderMode.TexturedChams)) {
             RenderSystem.setShaderTexture(0, texture);

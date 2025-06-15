@@ -19,12 +19,12 @@ import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.setting.impl.SettingGroup;
 import thunder.hack.utility.Timer;
 import thunder.hack.utility.player.InteractionUtility;
+import thunder.hack.utility.player.InteractionUtility.BlockPosWithFacing;
 import thunder.hack.utility.player.InventoryUtility;
 import thunder.hack.utility.player.MovementUtility;
 import thunder.hack.utility.player.SearchInvResult;
 import thunder.hack.utility.render.BlockAnimationUtility;
 
-import static thunder.hack.utility.player.InteractionUtility.BlockPosWithFacing;
 import static thunder.hack.utility.player.InteractionUtility.checkNearBlocks;
 
 public class Scaffold extends Module {

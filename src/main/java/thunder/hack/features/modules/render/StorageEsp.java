@@ -15,15 +15,15 @@ import thunder.hack.features.modules.Module;
 import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.utility.render.Render2DEngine;
-import thunder.hack.utility.render.Render3DEngine;
-import static thunder.hack.utility.render.Render3DEngine.FILLED_QUEUE;
-import static thunder.hack.utility.render.Render3DEngine.FillAction;
-import static thunder.hack.utility.render.Render3DEngine.OUTLINE_QUEUE;
-import static thunder.hack.utility.render.Render3DEngine.OutlineAction;
+import thunder.hack.utility.render.Render3DEngine.FillAction;
+import thunder.hack.utility.render.Render3DEngine.OutlineAction;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static thunder.hack.utility.render.Render3DEngine.FILLED_QUEUE;
+import static thunder.hack.utility.render.Render3DEngine.OUTLINE_QUEUE;
 
 public class StorageEsp extends Module {
     public StorageEsp() {

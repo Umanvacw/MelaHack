@@ -4,10 +4,10 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import thunder.hack.gui.font.FontRenderers;
 import thunder.hack.features.hud.HudElement;
-import thunder.hack.gui.windows.WindowsScreen;
 import thunder.hack.features.modules.client.HudEditor;
+import thunder.hack.gui.font.FontRenderers;
+import thunder.hack.gui.windows.WindowsScreen;
 import thunder.hack.setting.Setting;
 import thunder.hack.utility.render.Render2DEngine;
 
@@ -90,7 +90,7 @@ public class Hotbar extends HudElement {
             context.getMatrices().scale(0.9f, 0.9f, 1.0F);
             context.getMatrices().translate((float) (-(i + 8)), (float) (-(j + 12)), 0.0F);
             context.drawItem(itemStack, i, j);
-            context.drawItemInSlot(mc.textRenderer, itemStack, i, j);
+            context.drawStackOverlay(mc.textRenderer, itemStack, i, j);
             context.getMatrices().pop();
         }
     }

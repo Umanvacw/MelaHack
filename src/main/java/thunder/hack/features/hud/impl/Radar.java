@@ -5,10 +5,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Formatting;
 import thunder.hack.core.Managers;
 import thunder.hack.core.manager.client.ModuleManager;
-import thunder.hack.gui.font.FontRenderers;
 import thunder.hack.features.hud.HudElement;
 import thunder.hack.features.modules.client.HudEditor;
 import thunder.hack.features.modules.render.NameTags;
+import thunder.hack.gui.font.FontRenderers;
 import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.utility.render.Render2DEngine;
@@ -70,8 +70,8 @@ public class Radar extends HudElement {
                 if (entityPlayer == mc.player)
                     continue;
 
-                float posX = (float) (entityPlayer.prevX + (entityPlayer.prevX - entityPlayer.getX()) * Render3DEngine.getTickDelta() - mc.player.getX()) * 2;
-                float posZ = (float) (entityPlayer.prevZ + (entityPlayer.prevZ - entityPlayer.getZ()) * Render3DEngine.getTickDelta() - mc.player.getZ()) * 2;
+                float posX = (float) (entityPlayer.lastX + (entityPlayer.lastX - entityPlayer.getX()) * Render3DEngine.getTickDelta() - mc.player.getX()) * 2;
+                float posZ = (float) (entityPlayer.lastZ + (entityPlayer.lastZ - entityPlayer.getZ()) * Render3DEngine.getTickDelta() - mc.player.getZ()) * 2;
                 float cos = (float) Math.cos(mc.player.getYaw(Render3DEngine.getTickDelta()) * 0.017453292);
                 float sin = (float) Math.sin(mc.player.getYaw(Render3DEngine.getTickDelta()) * 0.017453292);
                 float rotY = -(posZ * cos - posX * sin);

@@ -18,7 +18,7 @@ public class NoBob extends Module {
             return;
 
         float g = -(mc.player.horizontalSpeed + (mc.player.horizontalSpeed - mc.player.prevHorizontalSpeed) * tickDelta);
-        float h = MathHelper.lerp(tickDelta, mc.player.prevStrideDistance, mc.player.strideDistance);
+        float h = MathHelper.lerp(tickDelta, mc.player.lastStrideDistance, mc.player.strideDistance);
         matrices.translate(0, -Math.abs(g * h * (mode.is(Mode.Sexy) ? 0.00035 : 0.)), 0);
     }
 

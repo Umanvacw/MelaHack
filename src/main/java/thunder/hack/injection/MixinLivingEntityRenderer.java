@@ -5,7 +5,6 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.render.entity.model.ParrotEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
@@ -25,9 +24,9 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import thunder.hack.ThunderHack;
 import thunder.hack.core.Managers;
 import thunder.hack.core.manager.client.ModuleManager;
-import thunder.hack.injection.accesors.IClientPlayerEntity;
 import thunder.hack.features.modules.Module;
 import thunder.hack.features.modules.client.ClientSettings;
+import thunder.hack.injection.accesors.IClientPlayerEntity;
 import thunder.hack.utility.math.MathUtility;
 import thunder.hack.utility.render.Render2DEngine;
 import thunder.hack.utility.render.Render3DEngine;
@@ -55,16 +54,16 @@ public abstract class MixinLivingEntityRenderer<T extends LivingEntity, M extend
         if (Module.fullNullCheck()) return;
         if (mc.player != null && livingEntity == mc.player && mc.player.getControllingVehicle() == null && ClientSettings.renderRotations.getValue() && !ThunderHack.isFuturePresent()) {
             originalHeadYaw = livingEntity.headYaw;
-            originalPrevHeadYaw = livingEntity.prevHeadYaw;
-            originalPrevHeadPitch = livingEntity.prevPitch;
+            originalPrevHeadYaw = livingEntity.lastHeadYaw;
+            originalPrevHeadPitch = livingEntity.lastPitch;
             originalHeadPitch = livingEntity.getPitch();
 
             livingEntity.setPitch(((IClientPlayerEntity) MinecraftClient.getInstance().player).getLastPitch());
-            livingEntity.prevPitch = Managers.PLAYER.lastPitch;
+            livingEntity.lastPitch = Managers.PLAYER.lastPitch;
             livingEntity.headYaw = ((IClientPlayerEntity) MinecraftClient.getInstance().player).getLastYaw();
             livingEntity.bodyYaw = Render2DEngine.interpolateFloat(Managers.PLAYER.prevBodyYaw, Managers.PLAYER.bodyYaw, Render3DEngine.getTickDelta());
-            livingEntity.prevHeadYaw = Managers.PLAYER.lastYaw;
-            livingEntity.prevBodyYaw = Render2DEngine.interpolateFloat(Managers.PLAYER.prevBodyYaw, Managers.PLAYER.bodyYaw, Render3DEngine.getTickDelta());
+            livingEntity.lastHeadYaw = Managers.PLAYER.lastYaw;
+            livingEntity.lastBodyYaw = Render2DEngine.interpolateFloat(Managers.PLAYER.prevBodyYaw, Managers.PLAYER.bodyYaw, Render3DEngine.getTickDelta());
         }
 
         if (livingEntity != mc.player && ModuleManager.freeCam.isEnabled() && ModuleManager.freeCam.track.getValue() && ModuleManager.freeCam.trackEntity != null && ModuleManager.freeCam.trackEntity == livingEntity) {
@@ -81,12 +80,12 @@ public abstract class MixinLivingEntityRenderer<T extends LivingEntity, M extend
                 Direction direction;
                 Entity entity;
                 matrixStack.push();
-                float h = MathHelper.lerpAngleDegrees(g, pe.prevBodyYaw, pe.bodyYaw);
-                float j = MathHelper.lerpAngleDegrees(g, pe.prevHeadYaw, pe.headYaw);
+                float h = MathHelper.lerpAngleDegrees(g, pe.lastBodyYaw, pe.bodyYaw);
+                float j = MathHelper.lerpAngleDegrees(g, pe.lastHeadYaw, pe.headYaw);
                 float k = j - h;
                 if (pe.hasVehicle() && (entity = pe.getVehicle()) instanceof LivingEntity) {
                     LivingEntity livingEntity2 = (LivingEntity) entity;
-                    h = MathHelper.lerpAngleDegrees(g, livingEntity2.prevBodyYaw, livingEntity2.bodyYaw);
+                    h = MathHelper.lerpAngleDegrees(g, livingEntity2.lastBodyYaw, livingEntity2.bodyYaw);
                     k = j - h;
                     float l = MathHelper.wrapDegrees(k);
                     if (l < -85.0f) {
@@ -101,7 +100,7 @@ public abstract class MixinLivingEntityRenderer<T extends LivingEntity, M extend
                     }
                     k = j - h;
                 }
-                float m = MathHelper.lerp(g, pe.prevPitch, pe.getPitch());
+                float m = MathHelper.lerp(g, pe.lastPitch, pe.getPitch());
                 if (LivingEntityRenderer.shouldFlipUpsideDown(pe)) {
                     m *= -1.0f;
                     k *= -1.0f;
@@ -118,8 +117,8 @@ public abstract class MixinLivingEntityRenderer<T extends LivingEntity, M extend
                 n = 0.0f;
                 float o = 0.0f;
                 if (!pe.hasVehicle() && pe.isAlive()) {
-                    n = pe.limbAnimator.getSpeed(g);
-                    o = pe.limbAnimator.getPos(g);
+                    n = pe.limbAnimator.getAmplitude(g);
+                    o = pe.limbAnimator.getAnimationProgress(g);
                     if (pe.isBaby())
                         o *= 3.0f;
 
@@ -139,10 +138,10 @@ public abstract class MixinLivingEntityRenderer<T extends LivingEntity, M extend
     public void postRender(T livingEntity) {
         if (Module.fullNullCheck()) return;
         if (mc.player != null && livingEntity == mc.player && mc.player.getControllingVehicle() == null && ClientSettings.renderRotations.getValue() && !ThunderHack.isFuturePresent()) {
-            livingEntity.prevPitch = originalPrevHeadPitch;
+            livingEntity.lastPitch = originalPrevHeadPitch;
             livingEntity.setPitch(originalHeadPitch);
             livingEntity.headYaw = originalHeadYaw;
-            livingEntity.prevHeadYaw = originalPrevHeadYaw;
+            livingEntity.lastHeadYaw = originalPrevHeadYaw;
         }
     }
 

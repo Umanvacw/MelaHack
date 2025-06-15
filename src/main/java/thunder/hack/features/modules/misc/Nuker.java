@@ -29,11 +29,12 @@ import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.setting.impl.ItemSelectSetting;
 import thunder.hack.utility.Timer;
-import thunder.hack.utility.world.ExplosionUtility;
 import thunder.hack.utility.player.InteractionUtility;
 import thunder.hack.utility.player.PlayerUtility;
 import thunder.hack.utility.render.Render2DEngine;
-import thunder.hack.utility.render.Render3DEngine;
+import thunder.hack.utility.render.Render3DEngine.FillAction;
+import thunder.hack.utility.render.Render3DEngine.OutlineAction;
+import thunder.hack.utility.world.ExplosionUtility;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -41,9 +42,7 @@ import java.util.ArrayList;
 import static net.minecraft.block.Blocks.*;
 import static thunder.hack.features.modules.client.ClientSettings.isRu;
 import static thunder.hack.utility.render.Render3DEngine.FILLED_QUEUE;
-import static thunder.hack.utility.render.Render3DEngine.FillAction;
 import static thunder.hack.utility.render.Render3DEngine.OUTLINE_QUEUE;
-import static thunder.hack.utility.render.Render3DEngine.OutlineAction;
 
 public class Nuker extends Module {
     public Nuker() {

@@ -21,8 +21,8 @@ import thunder.hack.ThunderHack;
 import thunder.hack.core.Managers;
 import thunder.hack.core.manager.client.ModuleManager;
 import thunder.hack.events.impl.*;
-import thunder.hack.injection.accesors.IInteractionManager;
 import thunder.hack.features.modules.Module;
+import thunder.hack.injection.accesors.IInteractionManager;
 import thunder.hack.setting.Setting;
 import thunder.hack.utility.interfaces.IEntity;
 import thunder.hack.utility.player.InventoryUtility;
@@ -245,7 +245,7 @@ public class Speed extends Module {
         }
         if (mode.getValue() != Mode.NCP && mode.getValue() != Mode.StrictStrafe) return;
         if (mc.player.getAbilities().flying) return;
-        if (mc.player.isFallFlying()) return;
+        if (mc.player.isGliding()) return;
         if (mc.player.getHungerManager().getFoodLevel() <= 6) return;
         if (event.isCancelled()) return;
         event.cancel();

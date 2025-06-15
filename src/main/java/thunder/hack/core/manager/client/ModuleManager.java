@@ -5,23 +5,23 @@ import net.minecraft.client.util.math.MatrixStack;
 import org.lwjgl.glfw.GLFW;
 import thunder.hack.ThunderHack;
 import thunder.hack.core.manager.IManager;
-import thunder.hack.gui.clickui.ClickGUI;
-import thunder.hack.gui.font.FontRenderers;
 import thunder.hack.features.hud.HudElement;
 import thunder.hack.features.hud.impl.*;
 import thunder.hack.features.modules.Module;
 import thunder.hack.features.modules.client.*;
 import thunder.hack.features.modules.combat.*;
 import thunder.hack.features.modules.misc.*;
-import thunder.hack.features.modules.movement.Timer;
 import thunder.hack.features.modules.movement.*;
 import thunder.hack.features.modules.player.*;
-import thunder.hack.features.modules.render.Particles;
 import thunder.hack.features.modules.render.*;
+import thunder.hack.gui.clickui.ClickGUI;
+import thunder.hack.gui.font.FontRenderers;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @SuppressWarnings("unused")

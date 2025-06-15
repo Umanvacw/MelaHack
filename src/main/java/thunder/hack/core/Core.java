@@ -22,15 +22,15 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec2f;
 import org.jetbrains.annotations.NotNull;
 import thunder.hack.ThunderHack;
-import thunder.hack.features.cmd.Command;
 import thunder.hack.core.manager.client.MacroManager;
 import thunder.hack.core.manager.client.ModuleManager;
 import thunder.hack.events.impl.*;
+import thunder.hack.features.cmd.Command;
+import thunder.hack.features.modules.client.ClientSettings;
+import thunder.hack.features.modules.client.HudEditor;
 import thunder.hack.gui.font.FontRenderers;
 import thunder.hack.gui.notification.Notification;
 import thunder.hack.gui.thundergui.ThunderGui;
-import thunder.hack.features.modules.client.HudEditor;
-import thunder.hack.features.modules.client.ClientSettings;
 import thunder.hack.utility.Timer;
 import thunder.hack.utility.player.InteractionUtility;
 import thunder.hack.utility.render.Render2DEngine;
@@ -38,7 +38,10 @@ import thunder.hack.utility.render.Render3DEngine;
 import thunder.hack.utility.render.TextureStorage;
 import thunder.hack.utility.render.animation.CaptureMark;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static thunder.hack.features.modules.Module.fullNullCheck;
@@ -224,7 +227,7 @@ public final class Core {
         }
 
         float g = -(playerEntity.horizontalSpeed + (playerEntity.horizontalSpeed - playerEntity.prevHorizontalSpeed) * tickDelta);
-        float h = MathHelper.lerp(tickDelta, playerEntity.prevStrideDistance, playerEntity.strideDistance);
+        float h = MathHelper.lerp(tickDelta, playerEntity.lastStrideDistance, playerEntity.strideDistance);
         matrices.translate(MathHelper.sin(g * (float) Math.PI) * h * 0.1f, -Math.abs(MathHelper.cos(g * (float) Math.PI) * h) * 0.3, 0.0f);
         matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.sin(g * (float) Math.PI) * h * 3.0f));
         matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(Math.abs(MathHelper.cos(g * (float) Math.PI - 0.2f) * h) * 0.3f));

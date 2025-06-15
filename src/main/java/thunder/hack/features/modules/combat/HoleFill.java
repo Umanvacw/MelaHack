@@ -2,8 +2,14 @@ package thunder.hack.features.modules.combat;
 
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3i;
@@ -18,19 +24,15 @@ import thunder.hack.features.modules.client.HudEditor;
 import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.setting.impl.SettingGroup;
+import thunder.hack.utility.Timer;
 import thunder.hack.utility.math.PredictUtility;
 import thunder.hack.utility.player.InteractionUtility;
-import thunder.hack.utility.Timer;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import thunder.hack.utility.render.BlockAnimationUtility;
 import thunder.hack.utility.world.HoleUtility;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import static thunder.hack.features.modules.client.ClientSettings.isRu;
 
@@ -105,7 +107,7 @@ public final class HoleFill extends Module {
     @EventHandler
     public void onTick(EventTick event) {
         if (fullNullCheck()) return;
-        if (jumpDisable.getValue() && mc.player.prevY < mc.player.getY())
+        if (jumpDisable.getValue() && mc.player.lastY < mc.player.getY())
             disable(isRu() ? "Вы прыгнули! Выключаю..." : "You jumped! Disabling...");
 
         if (tickCounter < actionInterval.getValue()) {

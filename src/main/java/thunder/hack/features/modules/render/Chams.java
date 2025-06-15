@@ -22,7 +22,6 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import thunder.hack.ThunderHack;
 import thunder.hack.core.Managers;
 import thunder.hack.events.impl.EventHeldItemRenderer;
 import thunder.hack.features.modules.Module;
@@ -144,12 +143,12 @@ public class Chams extends Module {
         model.handSwingProgress = pe.getHandSwingProgress(g);
         model.riding = pe.hasVehicle();
         model.child = false;
-        float h = MathHelper.lerpAngleDegrees(g, pe.prevBodyYaw, pe.bodyYaw);
-        float j = MathHelper.lerpAngleDegrees(g, pe.prevHeadYaw, pe.headYaw);
+        float h = MathHelper.lerpAngleDegrees(g, pe.lastBodyYaw, pe.bodyYaw);
+        float j = MathHelper.lerpAngleDegrees(g, pe.lastHeadYaw, pe.headYaw);
         float k = j - h;
         if (pe.hasVehicle() && (entity = pe.getVehicle()) instanceof LivingEntity) {
             LivingEntity livingEntity2 = (LivingEntity) entity;
-            h = MathHelper.lerpAngleDegrees(g, livingEntity2.prevBodyYaw, livingEntity2.bodyYaw);
+            h = MathHelper.lerpAngleDegrees(g, livingEntity2.lastBodyYaw, livingEntity2.bodyYaw);
             k = j - h;
             float l = MathHelper.wrapDegrees(k);
             if (l < -85.0f) {
@@ -164,7 +163,7 @@ public class Chams extends Module {
             }
             k = j - h;
         }
-        float m = MathHelper.lerp(g, pe.prevPitch, pe.getPitch());
+        float m = MathHelper.lerp(g, pe.lastPitch, pe.getPitch());
         if (LivingEntityRenderer.shouldFlipUpsideDown(pe)) {
             m *= -1.0f;
             k *= -1.0f;
@@ -184,8 +183,8 @@ public class Chams extends Module {
         n = 0.0f;
         float o = 0.0f;
         if (!pe.hasVehicle() && pe.isAlive()) {
-            n = pe.limbAnimator.getSpeed(g);
-            o = pe.limbAnimator.getPos(g);
+            n = pe.limbAnimator.getAmplitude(g);
+            o = pe.limbAnimator.getAnimationProgress(g);
             if (pe.isBaby())
                 o *= 3.0f;
 
@@ -213,9 +212,9 @@ public class Chams extends Module {
         float k = abstractClientPlayerEntity.getPitch(h);
         float l;
         float m;
-        if (abstractClientPlayerEntity.isFallFlying()) {
+        if (abstractClientPlayerEntity.isGliding()) {
             setupTransforms(abstractClientPlayerEntity, matrixStack, f, g, h);
-            l = (float) abstractClientPlayerEntity.getFallFlyingTicks() + h;
+            l = (float) abstractClientPlayerEntity.getGlidingTicks() + h;
             m = MathHelper.clamp(l * l / 100.0F, 0.0F, 1.0F);
             if (!abstractClientPlayerEntity.isUsingRiptide()) {
                 matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(m * (-90.0F - k)));

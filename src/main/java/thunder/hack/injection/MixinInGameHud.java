@@ -1,19 +1,19 @@
 package thunder.hack.injection;
 
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.Entity;
 import net.minecraft.scoreboard.ScoreboardObjective;
-import thunder.hack.core.Managers;
-import thunder.hack.core.manager.client.ModuleManager;
-import thunder.hack.features.hud.impl.Hotbar;
-import thunder.hack.gui.windows.WindowsScreen;
-import thunder.hack.features.modules.Module;
-import net.minecraft.client.gui.hud.InGameHud;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import thunder.hack.core.Managers;
+import thunder.hack.core.manager.client.ModuleManager;
+import thunder.hack.features.hud.impl.Hotbar;
+import thunder.hack.features.modules.Module;
+import thunder.hack.gui.windows.WindowsScreen;
 
 import static thunder.hack.core.manager.IManager.mc;
 
@@ -41,7 +41,7 @@ public abstract class MixinInGameHud {
 
         if (ModuleManager.hotbar.isEnabled()) {
             ci.cancel();
-            Hotbar.renderHotBarItems(tickCounter.getTickDelta(true), context);
+            Hotbar.renderHotBarItems(tickCounter.getTickProgress(true), context);
         }
     }
 

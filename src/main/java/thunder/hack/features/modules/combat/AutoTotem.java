@@ -160,7 +160,7 @@ public final class AutoTotem extends Module {
         } else if (invResult.found()) {
             int slot = invResult.slot() >= 36 ? invResult.slot() - 36 : invResult.slot();
             if (!hotbarFallBack.getValue()) swapTo(slot);
-            else mc.interactionManager.pickFromInventory(slot);
+            else mc.interactionManager.pickItemFromEntity(slot);
             delay = 20;
         }
     }
@@ -354,7 +354,7 @@ public final class AutoTotem extends Module {
         if (onFall.getValue() && (getTriggerHealth()) - (((mc.player.fallDistance - 3) / 2F) + 3.5F) < 0.5)
             item = Items.TOTEM_OF_UNDYING;
 
-        if (onElytra.getValue() && mc.player.isFallFlying())
+        if (onElytra.getValue() && mc.player.isGliding())
             item = Items.TOTEM_OF_UNDYING;
 
         if (onCrystalInHand.getValue()) {

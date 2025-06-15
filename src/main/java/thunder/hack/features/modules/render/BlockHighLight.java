@@ -8,16 +8,7 @@ import thunder.hack.features.modules.Module;
 import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.utility.render.Render2DEngine;
-
-import static thunder.hack.utility.render.Render3DEngine.*;
-import static thunder.hack.utility.render.Render3DEngine.OUTLINE_QUEUE;
-import static thunder.hack.utility.render.Render3DEngine.OUTLINE_SIDE_QUEUE;
-import static thunder.hack.utility.render.Render3DEngine.FILLED_QUEUE;
-import static thunder.hack.utility.render.Render3DEngine.FILLED_SIDE_QUEUE;
-import static thunder.hack.utility.render.Render3DEngine.OutlineAction;
-import static thunder.hack.utility.render.Render3DEngine.OutlineSideAction;
-import static thunder.hack.utility.render.Render3DEngine.FillAction;
-import static thunder.hack.utility.render.Render3DEngine.FillSideAction;
+import thunder.hack.utility.render.Render3DEngine.*;
 
 public class BlockHighLight extends Module {
     public BlockHighLight() {

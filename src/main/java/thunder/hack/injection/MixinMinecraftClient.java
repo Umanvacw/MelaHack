@@ -28,9 +28,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import thunder.hack.ThunderHack;
 import thunder.hack.core.manager.client.ModuleManager;
 import thunder.hack.events.impl.*;
+import thunder.hack.features.modules.Module;
 import thunder.hack.gui.clickui.ClickGUI;
 import thunder.hack.gui.font.FontRenderers;
-import thunder.hack.features.modules.Module;
 import thunder.hack.utility.render.WindowResizeCallback;
 
 import java.io.IOException;
@@ -163,7 +163,7 @@ public abstract class MixinMinecraftClient {
                 NativeImage nativeImage = NativeImage.read(imgList.get(i));
                 ByteBuffer bytebuffer = MemoryUtil.memAlloc(nativeImage.getWidth() * nativeImage.getHeight() * 4);
 
-                bytebuffer.asIntBuffer().put(nativeImage.copyPixelsRgba());
+                bytebuffer.asIntBuffer().put(nativeImage.copyPixelsAbgr());
                 buffer.position(i);
                 buffer.width(nativeImage.getWidth());
                 buffer.height(nativeImage.getHeight());

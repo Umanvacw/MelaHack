@@ -9,9 +9,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.RotationAxis;
 import thunder.hack.core.Managers;
-import thunder.hack.gui.font.FontRenderers;
 import thunder.hack.features.hud.HudElement;
 import thunder.hack.features.modules.client.HudEditor;
+import thunder.hack.gui.font.FontRenderers;
 import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.utility.math.MathUtility;
@@ -41,8 +41,8 @@ public class RadarRewrite extends HudElement {
 
     public static float getRotations(Entity entity) {
         if (mc.player == null) return 0;
-        double x = interp(entity.getPos().x, entity.prevX) - interp(mc.player.getPos().x, mc.player.prevX);
-        double z = interp(entity.getPos().z, entity.prevZ) - interp(mc.player.getPos().z, mc.player.prevZ);
+        double x = interp(entity.getPos().x, entity.lastX) - interp(mc.player.getPos().x, mc.player.lastX);
+        double z = interp(entity.getPos().z, entity.lastZ) - interp(mc.player.getPos().z, mc.player.lastZ);
         return (float) -(Math.atan2(x, z) * (180 / Math.PI));
     }
 

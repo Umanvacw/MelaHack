@@ -12,8 +12,8 @@ import net.minecraft.util.math.Box;
 import thunder.hack.core.Managers;
 import thunder.hack.events.impl.EventPostSync;
 import thunder.hack.events.impl.EventSync;
-import thunder.hack.injection.accesors.IClientPlayerEntity;
 import thunder.hack.features.modules.Module;
+import thunder.hack.injection.accesors.IClientPlayerEntity;
 import thunder.hack.setting.Setting;
 import thunder.hack.setting.impl.ColorSetting;
 import thunder.hack.setting.impl.SettingGroup;
@@ -182,7 +182,7 @@ public final class PistonPush extends Module {
             sendPacket(new PlayerMoveC2SPacket.LookAndOnGround(angle, 0, mc.player.isOnGround()));
             float prevYaw = mc.player.getYaw();
             mc.player.setYaw(angle);
-            mc.player.prevYaw = angle;
+            mc.player.lastYaw = angle;
             ((IClientPlayerEntity) mc.player).setLastYaw(angle);
             int prevSlot = mc.player.getInventory().selectedSlot;
             InteractionUtility.placeBlock(pistonPos, InteractionUtility.Rotate.None, interact.getValue(), placeMode.getValue(), getPistonSlot(), true, false);
